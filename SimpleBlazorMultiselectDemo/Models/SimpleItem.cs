@@ -1,6 +1,3 @@
 ﻿namespace SimpleBlazorMultiselectDemo.Models;
 
-public class SimpleItem
-{
-    
-}
+public record SimpleItem(int Id, string Name);

@@ -1,5 +1,93 @@
-﻿<h3>SimpleMultiselect</h3>
+﻿@using Microsoft.JSInterop
+@using System.Diagnostics
+@inject IJSRuntime JsRuntime
+@typeparam TItem
+
+<div class="btn-group w-100">
+    <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+        @if (SelectedOptions.Count == 0)
+        {
+            @DefaultText
+        }
+        else if (SelectedOptionsRenderer == null)
+        {
+            @string.Join(", ", SelectedOptions.Select(StringSelector))
+        }
+        else
+        {
+            @SelectedOptionsRenderer(SelectedOptions)
+        }
+    </button>
+    <div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton" style="max-height: 200px; overflow-y: auto; padding-top: 0;">
+        <!-- Filter -->
+        @if (CanFilter)
+        {
+            <div class="filter-container" style="position: sticky; top: 0; z-index: 1; background-color: white;">
+
+                <div style="margin-left: 10px; margin-right: 10px; padding-top: 8px; padding-bottom: 8px;">
+                    <input type="text" class="form-control" placeholder="Filter..." @bind="_filterText" @bind:event="oninput"/>
+                </div>
+            </div>
+        }
+
+        <!-- Options -->
+        <Virtualize Items="FilteredOptions().ToList()" Context="option">
+            <div class="dropdown-item"
+                 @onclick:stopPropagation="true"
+                 @onclick:preventDefault="true"
+                 @onclick="() => ToggleOption(option)">
+                <label>
+                    <input type="checkbox" checked="@IsOptionSelected(option)"/> @StringSelector(option)
+                </label>
+            </div>
+        </Virtualize>
+    </div>
+</div>
+
 
 @code {
-    
+    private string _filterText = "";
+
+    private bool IsOptionSelected(TItem option)
+    {
+        return SelectedOptions.Contains(option);
+    }
+
+    private async Task ToggleOption(TItem option)
+    {
+        if (SelectedOptions.Contains(option))
+        {
+            SelectedOptions.Remove(option);
+        }
+        else
+        {
+            SelectedOptions.Add(option);
+        }
+
+        await SelectedOptionsChanged.InvokeAsync(SelectedOptions);
+    }
+
+    /// <summary>
+    /// The options to display in the dropdown.
+    /// Does not filter if <see cref="CanFilter"/> is false.
+    /// </summary>
+    private IEnumerable<TItem> FilteredOptions()
+    {
+        foreach (var option in Options)
+        {
+            if (!CanFilter)
+            {
+                yield return option;
+                continue;
+            }
+
+            var predicate = FilterPredicate ?? DefaultFilterPredicate;
+
+            if (predicate(option, _filterText))
+            {
+                yield return option;
+            }
+        }
+    }
+
 }

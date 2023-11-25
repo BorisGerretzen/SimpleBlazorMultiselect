@@ -1,8 +1,22 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleBlazorMultiselect", "SimpleBlazorMultiselect\SimpleBlazorMultiselect.csproj", "{AEFF45E1-DA9E-427F-908F-2C142523BDAA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleBlazorMultiselectDemo", "SimpleBlazorMultiselectDemo\SimpleBlazorMultiselectDemo.csproj", "{B04E859C-9794-41AC-BD91-4544276A5FC8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AEFF45E1-DA9E-427F-908F-2C142523BDAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEFF45E1-DA9E-427F-908F-2C142523BDAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEFF45E1-DA9E-427F-908F-2C142523BDAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEFF45E1-DA9E-427F-908F-2C142523BDAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B04E859C-9794-41AC-BD91-4544276A5FC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B04E859C-9794-41AC-BD91-4544276A5FC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B04E859C-9794-41AC-BD91-4544276A5FC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B04E859C-9794-41AC-BD91-4544276A5FC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
