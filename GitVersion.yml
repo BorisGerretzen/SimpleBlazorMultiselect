@@ -1,5 +1,11 @@
 ﻿mode: Mainline
-branches: {}
+branches:
+    master:
+        regex: (origin/)?master
+    develop:
+      increment: Patch
+      tag: beta
+      regex: (origin/)?dev(elop)?(ment)?$
 ignore:
   sha: []
 merge-message-formats: {}
