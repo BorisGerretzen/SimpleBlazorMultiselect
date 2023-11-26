@@ -4,7 +4,6 @@ branches:
         regex: (origin/)?master
     develop:
       increment: Patch
-      tag: beta
       regex: (origin/)?dev(elop)?(ment)?$
 ignore:
   sha: []
