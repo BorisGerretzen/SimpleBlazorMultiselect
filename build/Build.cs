@@ -32,7 +32,6 @@ class Build : NukeBuild
     [Solution] readonly Solution Solution;
 
     AbsolutePath SourceDirectory => RootDirectory / "src";
-    AbsolutePath TestsDirectory => RootDirectory / "tests";
     AbsolutePath ArtifactsDirectory => RootDirectory / "artifacts";
 
     Project TargetProject => Solution.GetProject("SimpleBlazorMultiselect");
@@ -42,7 +41,6 @@ class Build : NukeBuild
         .Executes(() =>
         {
             SourceDirectory.GlobDirectories("**/bin", "**/obj").ForEach(path => path.DeleteDirectory());
-            TestsDirectory.GlobDirectories("**/bin", "**/obj").ForEach(path => path.DeleteDirectory());
             ArtifactsDirectory.CreateOrCleanDirectory();
         });
 
