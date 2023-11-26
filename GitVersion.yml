@@ -2,6 +2,7 @@
 branches:
   development:
     is-mainline: true
+    source-branches: []
     increment: Patch
     tag: beta
     regex: (origin/)?development$
