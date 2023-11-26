@@ -20,7 +20,7 @@ using Project = Nuke.Common.ProjectModel.Project;
 
 [GitHubActions("test", GitHubActionsImage.UbuntuLatest, On = new[] { GitHubActionsTrigger.PullRequest, GitHubActionsTrigger.WorkflowDispatch }, InvokedTargets = new[] { nameof(Test) }, FetchDepth = 10000)]
 [GitHubActions("publish", GitHubActionsImage.UbuntuLatest, On = new[] { GitHubActionsTrigger.WorkflowDispatch }, InvokedTargets = new[] { nameof(Pack), nameof(Push) }, ImportSecrets = new[] { nameof(NugetApiKey) }, FetchDepth = 10000)]
-[GitHubActions("publish demo", GitHubActionsImage.UbuntuLatest, On = new[] { GitHubActionsTrigger.WorkflowDispatch, GitHubActionsTrigger.Push }, InvokedTargets = new[] { nameof(DeployDemo) }, FetchDepth = 10000)]
+[GitHubActions("publish demo", GitHubActionsImage.UbuntuLatest, On = new[] { GitHubActionsTrigger.WorkflowDispatch, GitHubActionsTrigger.Push }, InvokedTargets = new[] { nameof(DeployDemo) }, FetchDepth = 10000, EnableGitHubToken = true)]
 class Build : NukeBuild
 {
     [Nuke.Common.Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")] readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
@@ -33,7 +33,7 @@ class Build : NukeBuild
 
     [Nuke.Common.Parameter("NuGet package version.")] readonly string PackageVersion;
 
-    static GitHubActions GitHubActions => GitHubActions.Instance;
+    GitHubActions GitHubActions => GitHubActions.Instance;
     [GitRepository] readonly GitRepository Repository;
 
     [Solution] readonly Solution Solution;
