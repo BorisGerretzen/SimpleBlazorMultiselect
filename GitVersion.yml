@@ -1,8 +1,8 @@
 ﻿mode: Mainline
 branches:
-  development:
+  develop:
     is-mainline: true
-    source-branches: []
+    source-branches: [ ]
     increment: Patch
     tag: beta
     regex: (origin/)?development$
