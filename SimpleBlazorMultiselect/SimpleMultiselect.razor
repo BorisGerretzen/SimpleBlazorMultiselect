@@ -3,8 +3,8 @@
 @inject IJSRuntime JsRuntime
 @typeparam TItem
 
-<div class="btn-group w-100">
-    <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+<div class="btn-group  w-100 simple-dropdown">
+    <button class="btn btn-outline-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
         @if (SelectedOptions.Count == 0)
         {
             @DefaultText
@@ -18,29 +18,29 @@
             @SelectedOptionsRenderer(SelectedOptions)
         }
     </button>
-    <div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton" style="max-height: 200px; overflow-y: auto; padding-top: 0;">
-        <!-- Filter -->
+    <div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
         @if (CanFilter)
         {
-            <div class="filter-container" style="position: sticky; top: 0; z-index: 1; background-color: white;">
-
-                <div style="margin-left: 10px; margin-right: 10px; padding-top: 8px; padding-bottom: 8px;">
+            <div class="filter-container">
+                <div>
                     <input type="text" class="form-control" placeholder="Filter..." @bind="_filterText" @bind:event="oninput"/>
                 </div>
             </div>
         }
 
-        <!-- Options -->
-        <Virtualize Items="FilteredOptions().ToList()" Context="option">
-            <div class="dropdown-item"
-                 @onclick:stopPropagation="true"
-                 @onclick:preventDefault="true"
-                 @onclick="() => ToggleOption(option)">
-                <label>
-                    <input type="checkbox" checked="@IsOptionSelected(option)"/> @StringSelector(option)
-                </label>
-            </div>
-        </Virtualize>
+        @if (Virtualize)
+        {
+            <Virtualize Items="FilteredOptions().ToList()" Context="option">
+                @RenderItem(option)
+            </Virtualize>
+        }
+        else
+        {
+            foreach (var option in FilteredOptions())
+            {
+                @RenderItem(option)
+            }
+        }
     </div>
 </div>
 
@@ -61,6 +61,10 @@
         }
         else
         {
+            if (!IsMultiSelect)
+            {
+                SelectedOptions.Clear();
+            }
             SelectedOptions.Add(option);
         }
 
@@ -89,5 +93,12 @@
             }
         }
     }
+
+    private RenderFragment<TItem> RenderItem => item =>
+        @<div class="dropdown-item" @onclick="() => ToggleOption(item)">
+            <label @onclick:stopPropagation="true">
+                <input type="checkbox" checked="@IsOptionSelected(item)" @onchange="() => ToggleOption(item)"/> @StringSelector(item)
+            </label>
+        </div>;
 
 }

@@ -4,12 +4,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleBlazorMultiselect", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleBlazorMultiselectDemo", "SimpleBlazorMultiselectDemo\SimpleBlazorMultiselectDemo.csproj", "{B04E859C-9794-41AC-BD91-4544276A5FC8}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build\_build.csproj", "{49DA0B6E-92AE-41C0-8763-16D0303F2015}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{49DA0B6E-92AE-41C0-8763-16D0303F2015}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49DA0B6E-92AE-41C0-8763-16D0303F2015}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEFF45E1-DA9E-427F-908F-2C142523BDAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AEFF45E1-DA9E-427F-908F-2C142523BDAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEFF45E1-DA9E-427F-908F-2C142523BDAA}.Release|Any CPU.ActiveCfg = Release|Any CPU

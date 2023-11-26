@@ -1,0 +1,72 @@
+﻿@page "/CustomTemplate"
+@inject IJSRuntime JsRuntime
+@implements IDisposable
+
+<h3>CustomTemplate</h3>
+Click on a selected item to remove it from the selection.
+<div class="row">
+    <div class="col-4">
+        <SimpleMultiselect
+            Options="_items"
+            @bind-SelectedOptions="_selectedItems">
+            <SelectedOptionsRenderer Context="options">
+                @foreach (var item in options)
+                {
+                    <span 
+                        class="badge bg-primary"
+                        @onclick="() => _selectedItems.Remove(item)"
+                        style="padding: 6px; margin-right: 10px;">
+                        @item
+                    </span>
+                }
+            </SelectedOptionsRenderer>
+        </SimpleMultiselect>
+    </div>
+    <div class="col-4">
+        You have selected the following items:
+        <ul>
+            @foreach (var item in _selectedItems)
+            {
+                <li>@item</li>
+            }
+        </ul>
+    </div>
+</div>
+
+
+<script>
+function preventDropdownClose(e) {
+    if (e.target.classList.contains('remove-button')) {
+        const dropdownToggle = e.target.closest('.simple-dropdown').querySelector('[data-bs-toggle="dropdown"]');
+        const dropdown = new bootstrap.Dropdown(dropdownToggle);
+        dropdown.hide();
+        dropdownToggle.blur();
+    }
+}
+
+function registerDropdownClosePrevention() {
+    document.addEventListener('click', preventDropdownClose);
+}
+
+function unregisterDropdownClosePrevention() {
+    document.removeEventListener('click', preventDropdownClose);
+}
+</script>
+
+@code {
+    private readonly List<string> _items = new() { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8", "Item 9", "Item 10" };
+    private List<string> _selectedItems = new();
+    
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JsRuntime.InvokeVoidAsync("registerDropdownClosePrevention");
+        }
+    }
+    
+    public void Dispose()
+    {
+        JsRuntime.InvokeVoidAsync("unregisterDropdownClosePrevention");
+    }
+}

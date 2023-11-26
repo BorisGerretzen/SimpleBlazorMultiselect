@@ -21,7 +21,7 @@ public partial class SimpleMultiselect<TItem> : ComponentBase
     /// </summary>
     [Parameter]
     public List<TItem> Options { get; set; } = new();
-    
+
     /// <summary>
     /// Function to convert an item to a string for display in the dropdown.
     /// </summary>
@@ -54,8 +54,21 @@ public partial class SimpleMultiselect<TItem> : ComponentBase
     /// <returns>Returns true if the item's string representation contains the filter string, false otherwise.</returns>
     [Parameter]
     public Func<TItem, string, bool>? FilterPredicate { get; set; }
+
     private bool DefaultFilterPredicate(TItem item, string filterString)
     {
         return StringSelector(item).Contains(filterString, StringComparison.OrdinalIgnoreCase);
     }
+    
+    /// <summary>
+    /// Whether or not the virtualize component should be used to render the options.
+    /// </summary>
+    [Parameter]
+    public bool Virtualize {get; set; }
+
+    /// <summary>
+    /// Whether or not the multiselect should allow multiple selections.
+    /// </summary>
+    [Parameter]
+    public bool IsMultiSelect { get; set; } = true;
 }

@@ -1,8 +1,22 @@
 # Simple blazor multiselect
 This package contains a simple blazor dropdown component that supports single and multiple selection.
 
+## Installation
+1. Add the following to your `_Imports.razor` file:
+    ```csharp
+    @using SimpleBlazorMultiselect
+    ```
+
+2. Add the following to the `<head>` of your `App.razor` or `index.html` file:
+    ```html
+    <link rel="stylesheet" href="/_content/SimpleBlazorMultiselect/bootstrap.min.css"/>
+    <script src="/_content/SimpleBlazorMultiselect/bootstrap.bundle.min.js"></script>
+    ```
+
 ## Usage
-See the project `SimpleBlazorMultiselectDemo` for more examples of how to use the component.
+See the project `SimpleBlazorMultiselectDemo` for more examples of how to use the component, 
+or take a look at the properties page on the [wiki](https://github.com/BorisGerretzen/SimpleBlazorMultiselect/wiki/Properties).
+
 Below are some short examples, they all use the following `@code` block:
 ```csharp
 @code {
@@ -42,8 +56,7 @@ Below are some short examples, they all use the following `@code` block:
 ```html
 <SimpleMultiselect
         Options="_items"
-        CanFilter="true"
-        Options="_items"
-        @bind-SelectedOptions="_selectedItems"/>
+        @bind-SelectedOptions="_selectedItems"
+        CanFilter="true"/>
 ```
 ![image](https://github.com/BorisGerretzen/SimpleBlazorMultiselect/assets/15902678/5f54049a-23c0-428b-992f-7735cffb985f)
