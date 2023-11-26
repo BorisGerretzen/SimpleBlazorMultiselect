@@ -19,8 +19,7 @@ using static Nuke.Common.Tools.DotNet.DotNetTasks;
 [GitHubActions("publish", GitHubActionsImage.UbuntuLatest, On = new[] { GitHubActionsTrigger.WorkflowDispatch }, InvokedTargets = new[] { nameof(Pack), nameof(Push) }, ImportSecrets = new[] { nameof(NugetApiKey) }, FetchDepth = 10000)]
 class Build : NukeBuild
 {
-    [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
-    readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
+    [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")] readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
 
     [GitVersion] readonly GitVersion GitVersion;
 
@@ -101,6 +100,7 @@ class Build : NukeBuild
     // ReSharper disable once UnusedMember.Local
     Target Pack => _ => _
         .DependsOn(Clean, Test)
+        .Before(Push)
         .Requires(() => Configuration == Configuration.Release)
         .Executes(() =>
         {
