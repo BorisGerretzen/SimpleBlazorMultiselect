@@ -85,10 +85,11 @@
           "items": {
             "type": "string",
             "enum": [
+              "BuildDemo",
               "Clean",
               "Compile",
+              "DeployDemo",
               "Pack",
-              "PublishDemo",
               "Push",
               "Restore",
               "Test"
@@ -105,10 +106,11 @@
           "items": {
             "type": "string",
             "enum": [
+              "BuildDemo",
               "Clean",
               "Compile",
+              "DeployDemo",
               "Pack",
-              "PublishDemo",
               "Push",
               "Restore",
               "Test"

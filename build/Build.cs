@@ -19,7 +19,8 @@ using static Nuke.Common.Tools.DotNet.DotNetTasks;
 using Project = Nuke.Common.ProjectModel.Project;
 
 [GitHubActions("test", GitHubActionsImage.UbuntuLatest, On = new[] { GitHubActionsTrigger.PullRequest, GitHubActionsTrigger.WorkflowDispatch }, InvokedTargets = new[] { nameof(Test) }, FetchDepth = 10000)]
-[GitHubActions("publish", GitHubActionsImage.UbuntuLatest, On = new[] { GitHubActionsTrigger.WorkflowDispatch }, InvokedTargets = new[] { nameof(Pack), nameof(Push), nameof(DeployDemo) }, ImportSecrets = new[] { nameof(NugetApiKey) }, FetchDepth = 10000)]
+[GitHubActions("publish", GitHubActionsImage.UbuntuLatest, On = new[] { GitHubActionsTrigger.WorkflowDispatch }, InvokedTargets = new[] { nameof(Pack), nameof(Push) }, ImportSecrets = new[] { nameof(NugetApiKey) }, FetchDepth = 10000)]
+[GitHubActions("publish demo", GitHubActionsImage.UbuntuLatest, On = new[] { GitHubActionsTrigger.WorkflowDispatch }, InvokedTargets = new[] { nameof(DeployDemo) }, FetchDepth = 10000)]
 class Build : NukeBuild
 {
     [Nuke.Common.Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")] readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
@@ -104,7 +105,7 @@ class Build : NukeBuild
                 .SetOutput(DemoDirectory)
             );
         });
-    
+
     Target DeployDemo => _ => _
         .DependsOn(BuildDemo)
         .Requires(() => Configuration == Configuration.Release)
@@ -114,10 +115,10 @@ class Build : NukeBuild
             GitHubTasks.GitHubClient = new GitHubClient(new ProductHeaderValue(nameof(NukeBuild)),
                 new InMemoryCredentialStore(credentials));
             var client = GitHubTasks.GitHubClient;
-            
+
             var repoOwner = Repository.GetGitHubOwner();
             var repoName = Repository.GetGitHubName();
-            
+
             var ghPagesBranch = await client.Repository.Branch.Get(repoOwner, repoName, "gh-pages");
             var latestCommit = await client.Git.Commit.Get(repoOwner, repoName, ghPagesBranch.Commit.Sha);
 
@@ -131,7 +132,7 @@ class Build : NukeBuild
                     Content = fileContent,
                     Encoding = EncodingType.Utf8
                 };
-                
+
                 var blobRef = await client.Git.Blob.Create(repoOwner, repoName, blob);
                 newTree.Tree.Add(new NewTreeItem
                 {
@@ -147,7 +148,7 @@ class Build : NukeBuild
             var newCommit = new NewCommit("Deploying to GitHub Pages", newTreeRef.Sha, latestCommit.Sha);
             var commitRef = await client.Git.Commit.Create(repoOwner, repoName, newCommit);
             await client.Git.Reference.Update(repoOwner, repoName, "heads/gh-pages", new ReferenceUpdate(commitRef.Sha));
-        })
+        });
     
     Target Test => _ => _
         .DependsOn(Compile)
