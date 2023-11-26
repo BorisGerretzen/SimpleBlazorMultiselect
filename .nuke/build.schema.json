@@ -88,6 +88,7 @@
               "Clean",
               "Compile",
               "Pack",
+              "PublishDemo",
               "Push",
               "Restore",
               "Test"
@@ -107,6 +108,7 @@
               "Clean",
               "Compile",
               "Pack",
+              "PublishDemo",
               "Push",
               "Restore",
               "Test"
