@@ -50,7 +50,6 @@
       "System.Text.RegularExpressions.wasm": "sha256-3TnJ+gFbcLQWd64dQi9CTds871jRDrawlfFObiJJADY="
     }
   },
-  "cacheBootResources": true,
   "debugLevel": 0,
   "linkerEnabled": true,
   "globalizationMode": "sharded",
