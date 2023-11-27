@@ -8,8 +8,7 @@
       "properties": {
         "BaseUrl": {
           "type": "string",
-          "description": "Base url",
-          "default": "Secrets must be entered via 'nuke :secrets [profile]'"
+          "description": "Base url"
         },
         "Configuration": {
           "type": "string",

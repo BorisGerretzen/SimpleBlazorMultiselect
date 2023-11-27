@@ -21,12 +21,11 @@ using Project = Nuke.Common.ProjectModel.Project;
 [GitHubActions("publish", GitHubActionsImage.UbuntuLatest, On = new[] { GitHubActionsTrigger.WorkflowDispatch }, InvokedTargets = new[] { nameof(Pack), nameof(Push) }, ImportSecrets = new[] { nameof(NugetApiKey) }, FetchDepth = 10000)]
 [GitHubActions("publish demo", 
     GitHubActionsImage.UbuntuLatest, 
-    On = new[] { GitHubActionsTrigger.WorkflowDispatch, GitHubActionsTrigger.Push }, 
+    On = new[] { GitHubActionsTrigger.WorkflowDispatch }, 
     InvokedTargets = new[] { nameof(Clean), nameof(BuildDemo), nameof(DeployDemo) }, 
     FetchDepth = 10000, 
     ImportSecrets = new[] {nameof(TokenGithub)},
     WritePermissions = new[] { GitHubActionsPermissions.Contents, GitHubActionsPermissions.Pages }
-    
     )]
 class Build : NukeBuild
 {
@@ -41,7 +40,7 @@ class Build : NukeBuild
     [Nuke.Common.Parameter("NuGet package version.")] readonly string PackageVersion;
     
     [Nuke.Common.Parameter("Github token.")] [Secret] readonly string TokenGithub;
-    [Nuke.Common.Parameter("Base url.")] [Secret] readonly string BaseUrl = "/SimpleBlazorMultiselect/";
+    [Nuke.Common.Parameter("Base url.")] readonly string BaseUrl = "/SimpleBlazorMultiselect/";
 
     [GitRepository] readonly GitRepository Repository;
 
