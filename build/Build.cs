@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Nuke.Common;
 using Nuke.Common.CI;
@@ -158,12 +159,13 @@ class Build : NukeBuild
             });
             var tasks = files.Select(async file =>
             {
-                var fileContent = await File.ReadAllTextAsync(file);
-                if (string.IsNullOrEmpty(fileContent)) return;
+                var bytes = file.ReadAllBytes();
+                var base64String = Convert.ToBase64String(bytes);
+                if (string.IsNullOrEmpty(base64String)) return;
                 var blob = new NewBlob
                 {
-                    Content = fileContent,
-                    Encoding = EncodingType.Utf8
+                    Content = base64String,
+                    Encoding = EncodingType.Base64
                 };
 
                 var blobRef = await client.Git.Blob.Create(repoOwner, repoName, blob);
