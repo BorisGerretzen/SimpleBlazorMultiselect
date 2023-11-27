@@ -1,0 +1,16 @@
+﻿@page "/MultipleDropdowns"
+<h3>MultipleDropdowns</h3>
+
+<div class="row">
+    @foreach(var _ in Enumerable.Range(0, 9))
+    {
+        <div class="@Classes">
+            <SimpleMultiselect Options="@_items" />
+        </div>
+    }
+</div>
+
+@code {
+    private const string Classes = "col-4 mb-4";
+    private readonly List<string> _items = new() { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8", "Item 9", "Item 10" };
+}
