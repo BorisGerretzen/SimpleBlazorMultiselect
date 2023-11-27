@@ -73,4 +73,16 @@ public partial class SimpleMultiselect<TItem> : ComponentBase
     /// </summary>
     [Parameter]
     public bool IsMultiSelect { get; set; } = true;
+    
+    /// <summary>
+    /// Additional CSS classes to apply.
+    /// </summary>
+    [Parameter]
+    public string? Class { get; set; }
+    
+    /// <summary>
+    /// Additional CSS styles to apply.
+    /// </summary>
+    [Parameter]
+    public string? Style { get; set; }
 }
