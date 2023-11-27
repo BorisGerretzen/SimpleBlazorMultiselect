@@ -9,8 +9,8 @@ This package contains a simple blazor dropdown component that supports single an
 
 2. Add the following to the `<head>` of your `App.razor` or `index.html` file:
     ```html
-    <link rel="stylesheet" href="/_content/SimpleBlazorMultiselect/bootstrap.min.css"/>
-    <script src="/_content/SimpleBlazorMultiselect/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="_content/SimpleBlazorMultiselect/bootstrap.min.css"/>
+    <script src="_content/SimpleBlazorMultiselect/bootstrap.bundle.min.js"></script>
     ```
 
 ## Usage
