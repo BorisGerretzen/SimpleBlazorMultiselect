@@ -1,0 +1,50 @@
+/* _content/SimpleBlazorMultiselect/SimpleMultiselect.razor.rz.scp.css */
+.filter-container[b-32ccgdfyms] {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: white;
+}
+
+.filter-container > div[b-32ccgdfyms] {
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.dropdown-menu[b-32ccgdfyms] {
+    max-height: 200px;
+    overflow-y: auto;
+    padding-top: 0;
+}
+
+.dropdown-item[b-32ccgdfyms] {
+    user-select: none;
+}
+
+.dropdown-toggle[b-32ccgdfyms]::after {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    margin-top: -2px;
+}
+
+.dropdown-toggle[b-32ccgdfyms] {
+    text-align: left;
+}
+
+.btn.dropdown-toggle[b-32ccgdfyms] {
+    --bs-btn-hover-color: var(--bs-btn-color);
+    --bs-btn-hover-bg: var(--bs-btn-bg);
+    --bs-btn-hover-border-color: var(--bs-btn-border-color);
+    --bs-btn-active-color: var(--bs-btn-color);
+    --bs-btn-active-bg: var(--bs-btn-bg);
+    --bs-btn-active-border-color: var(--bs-btn-border-color);
+}
+
+.btn.dropdown-toggle.show[b-32ccgdfyms] {
+    color: var(--bs-btn-color);
+    background-color: var(--bs-btn-bg);
+    border-color: var(--bs-btn-border-color);
+}
