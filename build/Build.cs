@@ -25,7 +25,7 @@ using Project = Nuke.Common.ProjectModel.Project;
 [GitHubActions("publish demo", 
     GitHubActionsImage.UbuntuLatest, 
     On = new[] { GitHubActionsTrigger.WorkflowDispatch, GitHubActionsTrigger.Push }, 
-    InvokedTargets = new[] { nameof(DeployDemo) }, 
+    InvokedTargets = new[] { nameof(Clean), nameof(BuildDemo), nameof(DeployDemo) }, 
     FetchDepth = 10000, 
     ImportSecrets = new[] {nameof(TokenGithub)},
     WritePermissions = new[] { GitHubActionsPermissions.Contents, GitHubActionsPermissions.Pages }

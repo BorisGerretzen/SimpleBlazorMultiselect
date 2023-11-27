@@ -37,7 +37,12 @@ jobs:
             .nuke/temp
             ~/.nuget/packages
           key: ${{ runner.os }}-${{ hashFiles('**/global.json', '**/*.csproj', '**/Directory.Packages.props') }}
-      - name: 'Run: DeployDemo'
-        run: ./build.cmd DeployDemo
+      - name: 'Run: Clean, BuildDemo, DeployDemo'
+        run: ./build.cmd Clean BuildDemo DeployDemo
         env:
           TokenGithub: ${{ secrets.TOKEN_GITHUB }}
+      - name: 'Publish: demo.zip'
+        uses: actions/upload-artifact@v3
+        with:
+          name: demo.zip
+          path: artifacts/demo.zip
