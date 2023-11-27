@@ -1,20 +1,16 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Nuke.Common;
-using Nuke.Common.CI;
 using Nuke.Common.CI.GitHubActions;
-using Nuke.Common.Execution;
 using Nuke.Common.Git;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
 using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
-using Nuke.Common.Tools.Git;
 using Nuke.Common.Tools.GitHub;
 using Nuke.Common.Tools.GitVersion;
+using Nuke.Common.Utilities;
 using Nuke.Common.Utilities.Collections;
 using Octokit;
 using Octokit.Internal;
@@ -45,6 +41,7 @@ class Build : NukeBuild
     [Nuke.Common.Parameter("NuGet package version.")] readonly string PackageVersion;
     
     [Nuke.Common.Parameter("Github token.")] [Secret] readonly string TokenGithub;
+    [Nuke.Common.Parameter("Base url.")] [Secret] readonly string BaseUrl = "/SimpleBlazorMultiselect/";
 
     [GitRepository] readonly GitRepository Repository;
 
@@ -157,6 +154,13 @@ class Build : NukeBuild
                 Type = TreeType.Blob,
                 Content = "* binary"
             });
+            
+            // replace base href
+            var indexHtml = wwwroot / "index.html";
+            var indexHtmlContent = indexHtml.ReadAllText();
+            indexHtmlContent = indexHtmlContent.ReplaceRegex("(<base href=\")(.*)(\"\\s*/\\s*>)", m => $"{m.Groups[1].Value}{BaseUrl}{m.Groups[3].Value}");
+            indexHtml.WriteAllText(indexHtmlContent);
+            
             var tasks = files.Select(async file =>
             {
                 var bytes = file.ReadAllBytes();
@@ -167,7 +171,7 @@ class Build : NukeBuild
                     Content = base64String,
                     Encoding = EncodingType.Base64
                 };
-
+            
                 var blobRef = await client.Git.Blob.Create(repoOwner, repoName, blob);
                 newTree.Tree.Add(new NewTreeItem
                 {

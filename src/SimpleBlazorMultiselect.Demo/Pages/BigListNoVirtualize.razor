@@ -1,0 +1,26 @@
+@page "/BigListNoVirtualize"
+<h3>Big list without virtualize</h3>
+<div class="row">
+    <div class="col-4">
+        <SimpleMultiselect
+            Options="_items"
+            CanFilter="true"
+            @bind-SelectedOptions="_selectedItems"/>
+    </div>
+    <div class="col-4">
+        You have selected the following items:
+        <ul>
+            @foreach (var item in _selectedItems)
+            {
+                <li>@item</li>
+            }
+        </ul>
+    </div>
+</div>
+
+
+@code {
+    private readonly List<string> _items = Enumerable.Range(1, 100_000).Select(i => $"Item {i}").ToList();
+    private List<string> _selectedItems = new();
+
+}
