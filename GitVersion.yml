@@ -1,5 +1,11 @@
 ﻿mode: Mainline
-branches: {}
+branches:
+  develop:
+    is-mainline: true
+    source-branches: [ ]
+    increment: Patch
+    tag: beta
+    regex: (origin/)?development$
 ignore:
   sha: []
 merge-message-formats: {}

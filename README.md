@@ -9,13 +9,14 @@ This package contains a simple blazor dropdown component that supports single an
 
 2. Add the following to the `<head>` of your `App.razor` or `index.html` file:
     ```html
-    <link rel="stylesheet" href="/_content/SimpleBlazorMultiselect/bootstrap.min.css"/>
-    <script src="/_content/SimpleBlazorMultiselect/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="_content/SimpleBlazorMultiselect/bootstrap.min.css"/>
+    <script src="_content/SimpleBlazorMultiselect/bootstrap.bundle.min.js"></script>
     ```
 
 ## Usage
 See the project `SimpleBlazorMultiselectDemo` for more examples of how to use the component, 
 or take a look at the properties page on the [wiki](https://github.com/BorisGerretzen/SimpleBlazorMultiselect/wiki/Properties).
+The demo project is hosted on [GitHub Pages](https://borisgerretzen.github.io/SimpleBlazorMultiselect/).
 
 Below are some short examples, they all use the following `@code` block:
 ```csharp

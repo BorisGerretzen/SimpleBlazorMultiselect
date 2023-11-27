@@ -6,6 +6,10 @@
     "build": {
       "type": "object",
       "properties": {
+        "BaseUrl": {
+          "type": "string",
+          "description": "Base url"
+        },
         "Configuration": {
           "type": "string",
           "description": "Configuration to build - Default is 'Debug' (local) or 'Release' (server)",
@@ -85,8 +89,10 @@
           "items": {
             "type": "string",
             "enum": [
+              "BuildDemo",
               "Clean",
               "Compile",
+              "DeployDemo",
               "Pack",
               "Push",
               "Restore",
@@ -104,14 +110,21 @@
           "items": {
             "type": "string",
             "enum": [
+              "BuildDemo",
               "Clean",
               "Compile",
+              "DeployDemo",
               "Pack",
               "Push",
               "Restore",
               "Test"
             ]
           }
+        },
+        "TokenGithub": {
+          "type": "string",
+          "description": "Github token",
+          "default": "Secrets must be entered via 'nuke :secrets [profile]'"
         },
         "Verbosity": {
           "type": "string",
