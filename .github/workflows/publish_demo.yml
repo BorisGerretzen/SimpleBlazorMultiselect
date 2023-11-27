@@ -18,6 +18,10 @@ name: publish_demo
 
 on: [workflow_dispatch, push]
 
+permissions:
+  contents: write
+  pages: write
+
 jobs:
   ubuntu-latest:
     name: ubuntu-latest
