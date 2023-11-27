@@ -13,7 +13,7 @@ Click on a selected item to remove it from the selection.
                 @foreach (var item in options)
                 {
                     <span 
-                        class="badge bg-primary"
+                        class="badge bg-primary remove-button"
                         @onclick="() => _selectedItems.Remove(item)"
                         style="padding: 6px; margin-right: 10px;">
                         @item
