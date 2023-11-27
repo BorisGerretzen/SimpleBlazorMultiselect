@@ -16,6 +16,7 @@ This package contains a simple blazor dropdown component that supports single an
 ## Usage
 See the project `SimpleBlazorMultiselectDemo` for more examples of how to use the component, 
 or take a look at the properties page on the [wiki](https://github.com/BorisGerretzen/SimpleBlazorMultiselect/wiki/Properties).
+The demo project is hosted on [GitHub Pages](https://borisgerretzen.github.io/SimpleBlazorMultiselect/).
 
 Below are some short examples, they all use the following `@code` block:
 ```csharp
