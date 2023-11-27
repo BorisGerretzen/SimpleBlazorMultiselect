@@ -203,3 +203,58 @@ main[b-5287nmq64r] {
         overflow-y: auto;
     }
 }
+/* /Pages/CustomStyling.razor.rz.scp.css */
+[b-j68ykq3v4j] .simple-dropdown .btn-outline-secondary {
+    --bs-btn-color: red;
+    --bs-btn-bg: black;
+    --bs-btn-border-color: green;
+    --bs-btn-border-width: 10px;
+
+    animation: rainbow-b-j68ykq3v4j 2.5s linear;
+    animation-iteration-count: infinite;
+}
+
+[b-j68ykq3v4j] .simple-dropdown .dropdown-item {
+    --bs-btn-color: red;
+    --bs-dropdown-link-hover-bg: yellow;
+}
+
+
+@keyframes rainbow-b-j68ykq3v4j{
+    100%,0%{
+        --bs-btn-color: rgb(255,0,0);
+    }
+    8%{
+        --bs-btn-color: rgb(255,127,0);
+    }
+    16%{
+        --bs-btn-color: rgb(255,255,0);
+    }
+    25%{
+        --bs-btn-color: rgb(127,255,0);
+    }
+    33%{
+        --bs-btn-color: rgb(0,255,0);
+    }
+    41%{
+        --bs-btn-color: rgb(0,255,127);
+    }
+    50%{
+        --bs-btn-color: rgb(0,255,255);
+    }
+    58%{
+        --bs-btn-color: rgb(0,127,255);
+    }
+    66%{
+        --bs-btn-color: rgb(0,0,255);
+    }
+    75%{
+        --bs-btn-color: rgb(127,0,255);
+    }
+    83%{
+        --bs-btn-color: rgb(255,0,255);
+    }
+    91%{
+        --bs-btn-color: rgb(255,0,127);
+    }
+}

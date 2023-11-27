@@ -30,10 +30,6 @@
     margin-top: -2px;
 }
 
-.dropdown-toggle[b-32ccgdfyms] {
-    text-align: left;
-}
-
 .btn.dropdown-toggle[b-32ccgdfyms] {
     --bs-btn-hover-color: var(--bs-btn-color);
     --bs-btn-hover-bg: var(--bs-btn-bg);
