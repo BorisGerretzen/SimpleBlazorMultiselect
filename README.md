@@ -1,4 +1,7 @@
 # Simple blazor multiselect
+[![NuGet](https://img.shields.io/nuget/v/SimpleBlazorMultiselect.svg)](https://www.nuget.org/packages/SimpleBlazorMultiselect/)
+[![pages-link](https://img.shields.io/badge/demo-grey?&logo=github)](https://borisgerretzen.github.io/SimpleBlazorMultiselect/)
+
 This package contains a simple blazor dropdown component that supports single and multiple selection.
 
 ## Installation
