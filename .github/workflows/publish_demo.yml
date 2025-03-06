@@ -3,11 +3,11 @@ name: Deploy Blazor WASM to GitHub Pages
 on:
   push:
     branches:
-      - master  # Trigger workflow when pushing to the master branch
+      - master  # Change this if you're using a different main branch
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # Use an Ubuntu runner for building
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
@@ -16,7 +16,7 @@ jobs:
     - name: Setup .NET SDK
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '8.0'  # Make sure this matches your target framework
+        dotnet-version: '8.0'  # Ensure this matches your project target
 
     - name: Restore dependencies
       run: dotnet restore ./src/SimpleBlazorMultiselect.Demo/SimpleBlazorMultiselect.Demo.csproj
@@ -27,9 +27,6 @@ jobs:
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
-        # Path to the folder where your build output is located
-        folder: dist
-        # Set the branch where GitHub Pages will be deployed
-        target-branch: gh-pages
-        # Set GitHub token
-        token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}  # Ensure your Actions permissions allow writing
+        publish_branch: gh-pages
+        publish_dir: ./dist
