@@ -20,8 +20,8 @@ jobs:
       run: dotnet publish ./src/SimpleBlazorMultiselect.Demo/SimpleBlazorMultiselect.Demo.csproj -c Release -o release --nologo
     
  
-    - name: Change base-tag in index.html from / to SimpleBlazorMultiselect_RazorLibraryComponent
-      run: sed -i 's/<base href="\/" \/>/<base href="\/SimpleBlazorMultiselect_RazorLibraryComponent\/" \/>/g' release/wwwroot/index.html
+    - name: Change base-tag in index.html from / to SimpleBlazorMultiselect_CSSVersion
+      run: sed -i 's/<base href="\/" \/>/<base href="\/SimpleBlazorMultiselect_CSSVersion\/" \/>/g' release/wwwroot/index.html
     
  
     - name: copy index.html to 404.html
