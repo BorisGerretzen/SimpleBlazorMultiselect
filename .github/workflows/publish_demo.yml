@@ -30,7 +30,7 @@ jobs:
         run: dotnet restore
 
       - name: Publish Blazor WebAssembly project
-        run: dotnet publish -c Release -f net8.0 -o dist  # Specify the target framework here
+        run: dotnet publish ./src/SimpleBlazorMultiselect.Demo/SimpleBlazorMultiselect.Demo.csproj -c Release -f net8.0 -o dist
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
