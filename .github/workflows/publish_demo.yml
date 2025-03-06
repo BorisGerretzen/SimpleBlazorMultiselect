@@ -3,7 +3,7 @@ name: publish_demo
 on:
   push:
     branches:
-      - master  # Change from 'main' to 'master'
+      - master
   workflow_dispatch:
 
 permissions:
@@ -30,7 +30,7 @@ jobs:
         run: dotnet restore
 
       - name: Publish Blazor WebAssembly project
-        run: dotnet publish -c Release -o dist
+        run: dotnet publish -c Release -f net8.0 -o dist  # Specify the target framework here
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
@@ -39,7 +39,7 @@ jobs:
           folder: dist/wwwroot
 
       - name: Publish demo.zip (optional)
-        uses: actions/upload-artifact@v4  # Update to v4
+        uses: actions/upload-artifact@v4
         with:
           name: demo.zip
           path: dist/wwwroot
