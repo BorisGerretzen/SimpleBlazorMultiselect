@@ -4,10 +4,9 @@ This package contains a simple blazor dropdown component that supports single an
 This fork is designed to use as a component for the Razor Class Library without additional nuget packages and adding stylesheets.
 
 ## Installation
-1. Add the following to your `_Imports.razor` file:
-    ```csharp
-    @using SimpleBlazorMultiselect
-    ```
+I'm not creating the separate nuget, so you have to manually add this to your project.
+
+Look for src/SimpleBlazorMultiselect and copy SimpleMultiselect.razor, SimpleMultiselect.razor.cs, SimpleMultiselect.razor.css right to your client project or a Razor Class Library. Then copy simpleMultiselect.js to wwwroot/js/ folder (in your app or razor class library). Check for path to this js file at the ToggleDropdown method inside SimpleMultiselect.razor.
 
 
 ## Usage
