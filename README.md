@@ -1,4 +1,4 @@
-# Simple blazor multiselect
+# Simple blazor multiselect Razor Class Library Component FORK
 This package contains a simple blazor dropdown component that supports single and multiple selection.
 
 This fork is designed to use as a component for the Razor Class Library without additional nuget packages and adding stylesheets.
