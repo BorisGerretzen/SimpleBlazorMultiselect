@@ -61,28 +61,77 @@ public partial class SimpleMultiselect<TItem> : ComponentBase
     {
         return StringSelector(item).Contains(filterString, StringComparison.OrdinalIgnoreCase);
     }
-    
+
     /// <summary>
     /// Whether or not the virtualize component should be used to render the options.
     /// </summary>
     [Parameter]
-    public bool Virtualize {get; set; }
+    public bool Virtualize { get; set; }
 
     /// <summary>
     /// Whether or not the multiselect should allow multiple selections.
     /// </summary>
     [Parameter]
     public bool IsMultiSelect { get; set; } = true;
-    
+
     /// <summary>
     /// Additional CSS classes to apply.
     /// </summary>
     [Parameter]
     public string? Class { get; set; }
-    
+
     /// <summary>
     /// Additional CSS styles to apply.
     /// </summary>
     [Parameter]
     public string? Style { get; set; }
+
+    private async Task ToggleOption(TItem option)
+    {
+        var newSelected = new List<TItem>(SelectedOptions);
+        if (newSelected.Contains(option))
+        {
+            newSelected.Remove(option);
+        }
+        else
+        {
+            if (!IsMultiSelect)
+            {
+                newSelected.Clear();
+            }
+            newSelected.Add(option);
+        }
+
+        SelectedOptions = newSelected;
+        await SelectedOptionsChanged.InvokeAsync(SelectedOptions);
+
+        if (!IsMultiSelect)
+        {
+            await CloseDropdown();
+        }
+    }
+
+    private bool IsOptionSelected(TItem option)
+    {
+        return SelectedOptions.Contains(option);
+    }
+
+    private IEnumerable<TItem> FilteredOptions()
+    {
+        foreach (var option in Options)
+        {
+            if (!CanFilter)
+            {
+                yield return option;
+                continue;
+            }
+
+            var predicate = FilterPredicate ?? DefaultFilterPredicate;
+
+            if (predicate(option, _filterText))
+            {
+                yield return option;
+            }
+        }
+    }
 }

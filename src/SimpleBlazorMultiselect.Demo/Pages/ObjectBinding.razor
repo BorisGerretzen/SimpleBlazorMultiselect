@@ -1,0 +1,24 @@
+﻿@page "/ObjectBinding"
+@using SimpleBlazorMultiselect.Demo.Models
+<SimpleMultiselect Options="_people"
+                   @bind-SelectedOptions="_selectedPeople"
+                   StringSelector="person => person.Name" />
+
+<h4>You have selected:</h4>
+<ul>
+    @foreach (var person in _selectedPeople)
+    {
+        <li>@person.Name (@person.Age years old)</li>
+    }
+</ul>
+
+@code {
+    private List<Person> _people = new()
+    {
+        new Person { Name = "Alice", Age = 30 },
+        new Person { Name = "Bob", Age = 25 },
+        new Person { Name = "Charlie", Age = 35 }
+    };
+
+    private List<Person> _selectedPeople = new();
+}

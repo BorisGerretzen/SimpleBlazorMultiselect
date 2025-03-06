@@ -1,0 +1,226 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\Projects\\dotnet\\BlazorMultiSelectDropdown\\SimpleBlazorMultiselect_RazorLibraryComponent\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{025632E8-CB51-4E49-B47C-B9C75D35A874}|src\\SimpleBlazorMultiselect.Demo\\SimpleBlazorMultiselect.Demo.csproj|e:\\projects\\dotnet\\blazormultiselectdropdown\\simpleblazormultiselect_razorlibrarycomponent\\src\\simpleblazormultiselect.demo\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{025632E8-CB51-4E49-B47C-B9C75D35A874}|src\\SimpleBlazorMultiselect.Demo\\SimpleBlazorMultiselect.Demo.csproj|solutionrelative:src\\simpleblazormultiselect.demo\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{025632E8-CB51-4E49-B47C-B9C75D35A874}|src\\SimpleBlazorMultiselect.Demo\\SimpleBlazorMultiselect.Demo.csproj|e:\\projects\\dotnet\\blazormultiselectdropdown\\simpleblazormultiselect_razorlibrarycomponent\\src\\simpleblazormultiselect.demo\\pages\\basicdropdown.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{025632E8-CB51-4E49-B47C-B9C75D35A874}|src\\SimpleBlazorMultiselect.Demo\\SimpleBlazorMultiselect.Demo.csproj|solutionrelative:src\\simpleblazormultiselect.demo\\pages\\basicdropdown.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{025632E8-CB51-4E49-B47C-B9C75D35A874}|src\\SimpleBlazorMultiselect.Demo\\SimpleBlazorMultiselect.Demo.csproj|e:\\projects\\dotnet\\blazormultiselectdropdown\\simpleblazormultiselect_razorlibrarycomponent\\src\\simpleblazormultiselect.demo\\pages\\objectbinding.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{025632E8-CB51-4E49-B47C-B9C75D35A874}|src\\SimpleBlazorMultiselect.Demo\\SimpleBlazorMultiselect.Demo.csproj|solutionrelative:src\\simpleblazormultiselect.demo\\pages\\objectbinding.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{025632E8-CB51-4E49-B47C-B9C75D35A874}|src\\SimpleBlazorMultiselect.Demo\\SimpleBlazorMultiselect.Demo.csproj|e:\\projects\\dotnet\\blazormultiselectdropdown\\simpleblazormultiselect_razorlibrarycomponent\\src\\simpleblazormultiselect.demo\\models\\person.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{025632E8-CB51-4E49-B47C-B9C75D35A874}|src\\SimpleBlazorMultiselect.Demo\\SimpleBlazorMultiselect.Demo.csproj|solutionrelative:src\\simpleblazormultiselect.demo\\models\\person.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{025632E8-CB51-4E49-B47C-B9C75D35A874}|src\\SimpleBlazorMultiselect.Demo\\SimpleBlazorMultiselect.Demo.csproj|e:\\projects\\dotnet\\blazormultiselectdropdown\\simpleblazormultiselect_razorlibrarycomponent\\src\\simpleblazormultiselect.demo\\models\\simpleitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{025632E8-CB51-4E49-B47C-B9C75D35A874}|src\\SimpleBlazorMultiselect.Demo\\SimpleBlazorMultiselect.Demo.csproj|solutionrelative:src\\simpleblazormultiselect.demo\\models\\simpleitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{025632E8-CB51-4E49-B47C-B9C75D35A874}|src\\SimpleBlazorMultiselect.Demo\\SimpleBlazorMultiselect.Demo.csproj|e:\\projects\\dotnet\\blazormultiselectdropdown\\simpleblazormultiselect_razorlibrarycomponent\\src\\simpleblazormultiselect.demo\\pages\\customstyling.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{025632E8-CB51-4E49-B47C-B9C75D35A874}|src\\SimpleBlazorMultiselect.Demo\\SimpleBlazorMultiselect.Demo.csproj|solutionrelative:src\\simpleblazormultiselect.demo\\pages\\customstyling.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1F3DCC28-1FD5-4F3C-B43D-564A44DBE398}|src\\SimpleBlazorMultiselect\\SimpleBlazorMultiselect.csproj|e:\\projects\\dotnet\\blazormultiselectdropdown\\simpleblazormultiselect_razorlibrarycomponent\\src\\simpleblazormultiselect\\simplemultiselect.razor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{1F3DCC28-1FD5-4F3C-B43D-564A44DBE398}|src\\SimpleBlazorMultiselect\\SimpleBlazorMultiselect.csproj|solutionrelative:src\\simpleblazormultiselect\\simplemultiselect.razor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1F3DCC28-1FD5-4F3C-B43D-564A44DBE398}|src\\SimpleBlazorMultiselect\\SimpleBlazorMultiselect.csproj|e:\\projects\\dotnet\\blazormultiselectdropdown\\simpleblazormultiselect_razorlibrarycomponent\\src\\simpleblazormultiselect\\simplemultiselect.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1F3DCC28-1FD5-4F3C-B43D-564A44DBE398}|src\\SimpleBlazorMultiselect\\SimpleBlazorMultiselect.csproj|solutionrelative:src\\simpleblazormultiselect\\simplemultiselect.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1F3DCC28-1FD5-4F3C-B43D-564A44DBE398}|src\\SimpleBlazorMultiselect\\SimpleBlazorMultiselect.csproj|e:\\projects\\dotnet\\blazormultiselectdropdown\\simpleblazormultiselect_razorlibrarycomponent\\src\\simpleblazormultiselect\\simplemultiselect.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1F3DCC28-1FD5-4F3C-B43D-564A44DBE398}|src\\SimpleBlazorMultiselect\\SimpleBlazorMultiselect.csproj|solutionrelative:src\\simpleblazormultiselect\\simplemultiselect.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{025632E8-CB51-4E49-B47C-B9C75D35A874}|src\\SimpleBlazorMultiselect.Demo\\SimpleBlazorMultiselect.Demo.csproj|e:\\projects\\dotnet\\blazormultiselectdropdown\\simpleblazormultiselect_razorlibrarycomponent\\src\\simpleblazormultiselect.demo\\pages\\customstyling.razor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{025632E8-CB51-4E49-B47C-B9C75D35A874}|src\\SimpleBlazorMultiselect.Demo\\SimpleBlazorMultiselect.Demo.csproj|solutionrelative:src\\simpleblazormultiselect.demo\\pages\\customstyling.razor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{025632E8-CB51-4E49-B47C-B9C75D35A874}|src\\SimpleBlazorMultiselect.Demo\\SimpleBlazorMultiselect.Demo.csproj|e:\\projects\\dotnet\\blazormultiselectdropdown\\simpleblazormultiselect_razorlibrarycomponent\\src\\simpleblazormultiselect.demo\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{025632E8-CB51-4E49-B47C-B9C75D35A874}|src\\SimpleBlazorMultiselect.Demo\\SimpleBlazorMultiselect.Demo.csproj|solutionrelative:src\\simpleblazormultiselect.demo\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{025632E8-CB51-4E49-B47C-B9C75D35A874}|src\\SimpleBlazorMultiselect.Demo\\SimpleBlazorMultiselect.Demo.csproj|e:\\projects\\dotnet\\blazormultiselectdropdown\\simpleblazormultiselect_razorlibrarycomponent\\src\\simpleblazormultiselect.demo\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{025632E8-CB51-4E49-B47C-B9C75D35A874}|src\\SimpleBlazorMultiselect.Demo\\SimpleBlazorMultiselect.Demo.csproj|solutionrelative:src\\simpleblazormultiselect.demo\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "SimpleMultiselect.razor",
+              "DocumentMoniker": "E:\\Projects\\dotnet\\BlazorMultiSelectDropdown\\SimpleBlazorMultiselect_RazorLibraryComponent\\src\\SimpleBlazorMultiselect\\SimpleMultiselect.razor",
+              "RelativeDocumentMoniker": "src\\SimpleBlazorMultiselect\\SimpleMultiselect.razor",
+              "ToolTip": "E:\\Projects\\dotnet\\BlazorMultiSelectDropdown\\SimpleBlazorMultiselect_RazorLibraryComponent\\src\\SimpleBlazorMultiselect\\SimpleMultiselect.razor",
+              "RelativeToolTip": "src\\SimpleBlazorMultiselect\\SimpleMultiselect.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAA0AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-06T13:17:43.243Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "SimpleMultiselect.razor.cs",
+              "DocumentMoniker": "E:\\Projects\\dotnet\\BlazorMultiSelectDropdown\\SimpleBlazorMultiselect_RazorLibraryComponent\\src\\SimpleBlazorMultiselect\\SimpleMultiselect.razor.cs",
+              "RelativeDocumentMoniker": "src\\SimpleBlazorMultiselect\\SimpleMultiselect.razor.cs",
+              "ToolTip": "E:\\Projects\\dotnet\\BlazorMultiSelectDropdown\\SimpleBlazorMultiselect_RazorLibraryComponent\\src\\SimpleBlazorMultiselect\\SimpleMultiselect.razor.cs",
+              "RelativeToolTip": "src\\SimpleBlazorMultiselect\\SimpleMultiselect.razor.cs",
+              "ViewState": "AQIAAGAAAAAAAAAAAADwv4gAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T13:17:53.941Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "NavMenu.razor",
+              "DocumentMoniker": "E:\\Projects\\dotnet\\BlazorMultiSelectDropdown\\SimpleBlazorMultiselect_RazorLibraryComponent\\src\\SimpleBlazorMultiselect.Demo\\Layout\\NavMenu.razor",
+              "RelativeDocumentMoniker": "src\\SimpleBlazorMultiselect.Demo\\Layout\\NavMenu.razor",
+              "ToolTip": "E:\\Projects\\dotnet\\BlazorMultiSelectDropdown\\SimpleBlazorMultiselect_RazorLibraryComponent\\src\\SimpleBlazorMultiselect.Demo\\Layout\\NavMenu.razor",
+              "RelativeToolTip": "src\\SimpleBlazorMultiselect.Demo\\Layout\\NavMenu.razor",
+              "ViewState": "AQIAADUAAAAAAAAAAAAIwEoAAABUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-06T13:54:22.492Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "BasicDropdown.razor",
+              "DocumentMoniker": "E:\\Projects\\dotnet\\BlazorMultiSelectDropdown\\SimpleBlazorMultiselect_RazorLibraryComponent\\src\\SimpleBlazorMultiselect.Demo\\Pages\\BasicDropdown.razor",
+              "RelativeDocumentMoniker": "src\\SimpleBlazorMultiselect.Demo\\Pages\\BasicDropdown.razor",
+              "ToolTip": "E:\\Projects\\dotnet\\BlazorMultiSelectDropdown\\SimpleBlazorMultiselect_RazorLibraryComponent\\src\\SimpleBlazorMultiselect.Demo\\Pages\\BasicDropdown.razor",
+              "RelativeToolTip": "src\\SimpleBlazorMultiselect.Demo\\Pages\\BasicDropdown.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-06T13:21:37.266Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Person.cs",
+              "DocumentMoniker": "E:\\Projects\\dotnet\\BlazorMultiSelectDropdown\\SimpleBlazorMultiselect_RazorLibraryComponent\\src\\SimpleBlazorMultiselect.Demo\\Models\\Person.cs",
+              "RelativeDocumentMoniker": "src\\SimpleBlazorMultiselect.Demo\\Models\\Person.cs",
+              "ToolTip": "E:\\Projects\\dotnet\\BlazorMultiSelectDropdown\\SimpleBlazorMultiselect_RazorLibraryComponent\\src\\SimpleBlazorMultiselect.Demo\\Models\\Person.cs",
+              "RelativeToolTip": "src\\SimpleBlazorMultiselect.Demo\\Models\\Person.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T13:52:39.332Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "SimpleItem.cs",
+              "DocumentMoniker": "E:\\Projects\\dotnet\\BlazorMultiSelectDropdown\\SimpleBlazorMultiselect_RazorLibraryComponent\\src\\SimpleBlazorMultiselect.Demo\\Models\\SimpleItem.cs",
+              "RelativeDocumentMoniker": "src\\SimpleBlazorMultiselect.Demo\\Models\\SimpleItem.cs",
+              "ToolTip": "E:\\Projects\\dotnet\\BlazorMultiSelectDropdown\\SimpleBlazorMultiselect_RazorLibraryComponent\\src\\SimpleBlazorMultiselect.Demo\\Models\\SimpleItem.cs",
+              "RelativeToolTip": "src\\SimpleBlazorMultiselect.Demo\\Models\\SimpleItem.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-06T13:52:26.725Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ObjectBinding.razor",
+              "DocumentMoniker": "E:\\Projects\\dotnet\\BlazorMultiSelectDropdown\\SimpleBlazorMultiselect_RazorLibraryComponent\\src\\SimpleBlazorMultiselect.Demo\\Pages\\ObjectBinding.razor",
+              "RelativeDocumentMoniker": "src\\SimpleBlazorMultiselect.Demo\\Pages\\ObjectBinding.razor",
+              "ToolTip": "E:\\Projects\\dotnet\\BlazorMultiSelectDropdown\\SimpleBlazorMultiselect_RazorLibraryComponent\\src\\SimpleBlazorMultiselect.Demo\\Pages\\ObjectBinding.razor",
+              "RelativeToolTip": "src\\SimpleBlazorMultiselect.Demo\\Pages\\ObjectBinding.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-06T13:51:20.529Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "CustomStyling.razor.css",
+              "DocumentMoniker": "E:\\Projects\\dotnet\\BlazorMultiSelectDropdown\\SimpleBlazorMultiselect_RazorLibraryComponent\\src\\SimpleBlazorMultiselect.Demo\\Pages\\CustomStyling.razor.css",
+              "RelativeDocumentMoniker": "src\\SimpleBlazorMultiselect.Demo\\Pages\\CustomStyling.razor.css",
+              "ToolTip": "E:\\Projects\\dotnet\\BlazorMultiSelectDropdown\\SimpleBlazorMultiselect_RazorLibraryComponent\\src\\SimpleBlazorMultiselect.Demo\\Pages\\CustomStyling.razor.css",
+              "RelativeToolTip": "src\\SimpleBlazorMultiselect.Demo\\Pages\\CustomStyling.razor.css",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-03-06T13:30:58.066Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CustomStyling.razor",
+              "DocumentMoniker": "E:\\Projects\\dotnet\\BlazorMultiSelectDropdown\\SimpleBlazorMultiselect_RazorLibraryComponent\\src\\SimpleBlazorMultiselect.Demo\\Pages\\CustomStyling.razor",
+              "RelativeDocumentMoniker": "src\\SimpleBlazorMultiselect.Demo\\Pages\\CustomStyling.razor",
+              "ToolTip": "E:\\Projects\\dotnet\\BlazorMultiSelectDropdown\\SimpleBlazorMultiselect_RazorLibraryComponent\\src\\SimpleBlazorMultiselect.Demo\\Pages\\CustomStyling.razor",
+              "RelativeToolTip": "src\\SimpleBlazorMultiselect.Demo\\Pages\\CustomStyling.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAwAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-06T13:30:46.694Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SimpleMultiselect.razor.css",
+              "DocumentMoniker": "E:\\Projects\\dotnet\\BlazorMultiSelectDropdown\\SimpleBlazorMultiselect_RazorLibraryComponent\\src\\SimpleBlazorMultiselect\\SimpleMultiselect.razor.css",
+              "RelativeDocumentMoniker": "src\\SimpleBlazorMultiselect\\SimpleMultiselect.razor.css",
+              "ToolTip": "E:\\Projects\\dotnet\\BlazorMultiSelectDropdown\\SimpleBlazorMultiselect_RazorLibraryComponent\\src\\SimpleBlazorMultiselect\\SimpleMultiselect.razor.css",
+              "RelativeToolTip": "src\\SimpleBlazorMultiselect\\SimpleMultiselect.razor.css",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABwAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-03-06T13:18:09.605Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "index.html",
+              "DocumentMoniker": "E:\\Projects\\dotnet\\BlazorMultiSelectDropdown\\SimpleBlazorMultiselect_RazorLibraryComponent\\src\\SimpleBlazorMultiselect.Demo\\wwwroot\\index.html",
+              "RelativeDocumentMoniker": "src\\SimpleBlazorMultiselect.Demo\\wwwroot\\index.html",
+              "ToolTip": "E:\\Projects\\dotnet\\BlazorMultiSelectDropdown\\SimpleBlazorMultiselect_RazorLibraryComponent\\src\\SimpleBlazorMultiselect.Demo\\wwwroot\\index.html",
+              "RelativeToolTip": "src\\SimpleBlazorMultiselect.Demo\\wwwroot\\index.html",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-03-06T13:16:04.926Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "App.razor",
+              "DocumentMoniker": "E:\\Projects\\dotnet\\BlazorMultiSelectDropdown\\SimpleBlazorMultiselect_RazorLibraryComponent\\src\\SimpleBlazorMultiselect.Demo\\App.razor",
+              "RelativeDocumentMoniker": "src\\SimpleBlazorMultiselect.Demo\\App.razor",
+              "ToolTip": "E:\\Projects\\dotnet\\BlazorMultiSelectDropdown\\SimpleBlazorMultiselect_RazorLibraryComponent\\src\\SimpleBlazorMultiselect.Demo\\App.razor",
+              "RelativeToolTip": "src\\SimpleBlazorMultiselect.Demo\\App.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-06T13:16:01.897Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
