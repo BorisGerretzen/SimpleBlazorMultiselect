@@ -1,45 +1,35 @@
-name: publish_demo
+name: Deploy Blazor WASM to GitHub Pages
 
 on:
   push:
     branches:
-      - master
-  workflow_dispatch:
-
-permissions:
-  contents: write
-  pages: write
+      - master  # Trigger workflow when pushing to the master branch
 
 jobs:
-  deploy:
-    name: Deploy to GitHub Pages
-    runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest  # Use an Ubuntu runner for building
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '8.0.x'
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0'  # Make sure this matches your target framework
 
-      - name: Restore dependencies
-        run: dotnet restore
+    - name: Restore dependencies
+      run: dotnet restore ./src/SimpleBlazorMultiselect.Demo/SimpleBlazorMultiselect.Demo.csproj
 
-      - name: Publish Blazor WebAssembly project
-        run: dotnet publish ./src/SimpleBlazorMultiselect.Demo/SimpleBlazorMultiselect.Demo.csproj -c Release -f net8.0 -o dist
+    - name: Build Blazor WebAssembly project
+      run: dotnet publish ./src/SimpleBlazorMultiselect.Demo/SimpleBlazorMultiselect.Demo.csproj -c Release -f net8.0 -o dist
 
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: gh-pages
-          folder: dist/wwwroot
-
-      - name: Publish demo.zip (optional)
-        uses: actions/upload-artifact@v4
-        with:
-          name: demo.zip
-          path: dist/wwwroot
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        # Path to the folder where your build output is located
+        folder: dist
+        # Set the branch where GitHub Pages will be deployed
+        target-branch: gh-pages
+        # Set GitHub token
+        token: ${{ secrets.GITHUB_TOKEN }}
