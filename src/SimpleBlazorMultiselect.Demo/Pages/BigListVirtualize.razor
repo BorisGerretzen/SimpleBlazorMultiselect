@@ -21,6 +21,6 @@
 
 
 @code {
-    private readonly List<string> _items = Enumerable.Range(1, 1000_000).Select(i => $"Item {i}").ToList();
+    private readonly List<string> _items = Enumerable.Range(1, 100_000).Select(i => $"Item {i}").ToList();
     private HashSet<string> _selectedItems = new();
 }
