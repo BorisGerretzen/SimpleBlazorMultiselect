@@ -1,24 +1,30 @@
-# Simple blazor multiselect Razor Class Library Component FORK without using Bootstrap
-This package contains a simple blazor dropdown component that supports single and multiple selection.
+# Simple blazor multiselect
+[![NuGet](https://img.shields.io/nuget/v/SimpleBlazorMultiselect.svg)](https://www.nuget.org/packages/SimpleBlazorMultiselect/)
+[![Static Badge](https://img.shields.io/badge/View%20demo-6c757d)](https://borisgerretzen.github.io/SimpleBlazorMultiselect/)
 
-This fork is designed to use as a component for the Razor Class Library without additional nuget packages and adding stylesheets.
+This package contains a simple Blazor dropdown component that supports single and multiple selection.
+It is compatible with Bootstrap in the sense that if you include Bootstrap in your project, the dropdown will look and feel like a Bootstrap dropdown including dark mode.
 
 ## Installation
-I'm not creating the separate nuget, so you have to manually add this to your project.
-
-Look for src/SimpleBlazorMultiselect and copy SimpleMultiselect.razor, SimpleMultiselect.razor.cs, SimpleMultiselect.razor.css right to your client project or a Razor Class Library. Then copy simpleMultiselect.js to wwwroot/js/ folder (in your app or razor class library). Check for path to this js file at the ToggleDropdown method inside SimpleMultiselect.razor.
-
+You can find the Nuget package [here](https://www.nuget.org/packages/SimpleBlazorMultiselect/), install it using the following command:
+```bash
+dotnet add package SimpleBlazorMultiselect
+```
 
 ## Usage
 See the project `SimpleBlazorMultiselectDemo` for more examples of how to use the component, 
 or take a look at the properties page on the [wiki](https://github.com/BorisGerretzen/SimpleBlazorMultiselect/wiki/Properties).
-The demo project is hosted on [GitHub Pages](https://borisgerretzen.github.io/SimpleBlazorMultiselect/).
+You can also view a live demo [here](https://borisgerretzen.github.io/SimpleBlazorMultiselect/).
+
+> [!IMPORTANT]
+> If you want to use the project without Bootstrap, set `SimpleMultiselectGlobals.Standalone` to `true` in your `Program.cs` file.
+> Alternatively you can use a cascading parameter with name `Standalone` around the component.
 
 Below are some short examples, they all use the following `@code` block:
 ```csharp
 @code {
-    private readonly List<string> _items = new() { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8", "Item 9", "Item 10" };
-    private List<string> _selectedItems = new();
+    private readonly List<string> _items = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8", "Item 9", "Item 10" ];
+    private HashSet<string> _selectedItems = new();
 }
 ```
 
