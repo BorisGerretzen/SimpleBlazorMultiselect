@@ -63,3 +63,7 @@ Below are some short examples, they all use the following `@code` block:
         CanFilter="true"/>
 ```
 ![image](https://github.com/BorisGerretzen/SimpleBlazorMultiselect/assets/15902678/5f54049a-23c0-428b-992f-7735cffb985f)
+
+### Bootstrap dark mode
+![image](https://github.com/user-attachments/assets/8613cd7a-cf6f-4116-b5f6-c0ee2b995fa6)
+
