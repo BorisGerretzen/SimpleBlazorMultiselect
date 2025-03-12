@@ -1,28 +1,28 @@
 <Project Sdk="Microsoft.NET.Sdk.Razor">
     <PropertyGroup>
-        <TargetFrameworks>net8.0</TargetFrameworks>
+        <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <AssemblyName>SimpleBlazorMultiselect</AssemblyName>
         <RootNamespace>SimpleBlazorMultiselect</RootNamespace>
         <PackageReadmeFile>README.md</PackageReadmeFile>
-        <PackageLicenseFile>LICENSE</PackageLicenseFile>
+        <PackageLicenseExpression>LGPL-3.0-only</PackageLicenseExpression>
         <RepositoryUrl>https://github.com/BorisGerretzen/SimpleBlazorMultiselect</RepositoryUrl>
         <Authors>Boris Gerretzen</Authors>
-        <Description>Simple Blazor multiselect component</Description>
-        <PackageTags>Blazor, multiselect, form, dropdown, combobox</PackageTags>
+        <Description>Simple Blazor multiselect component, Bootstrap compatible but not required!</Description>
+        <PackageTags>Blazor, multiselect, form, dropdown, combobox, bootstrap</PackageTags>
         <RepositoryType>git</RepositoryType>
+        
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     </PropertyGroup>
-
+    
     <ItemGroup>
-        <SupportedPlatform Include="browser" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Condition="'$(TargetFramework)' == 'net6.0'" Include="Microsoft.AspNetCore.Components.Web" Version="6.0.25" />
-        <PackageReference Condition="'$(TargetFramework)' == 'net7.0'" Include="Microsoft.AspNetCore.Components.Web" Version="7.0.14" />
-        <PackageReference Condition="'$(TargetFramework)' == 'net8.0'" Include="Microsoft.AspNetCore.Components.Web" Version="8.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.14" PrivateAssets="All" />
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
     </ItemGroup>
     
     <ItemGroup>

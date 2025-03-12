@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 
 namespace SimpleBlazorMultiselect;
@@ -10,13 +12,13 @@ public partial class SimpleMultiselect<TItem> : ComponentBase
     /// Represents the selected options in the multiselect dropdown.
     /// </summary>
     [Parameter]
-    public List<TItem> SelectedOptions { get; set; } = new();
+    public HashSet<TItem> SelectedOptions { get; set; } = new();
 
     /// <summary>
     /// Event callback that is invoked when the selected options change.
     /// </summary>
     [Parameter]
-    public EventCallback<List<TItem>> SelectedOptionsChanged { get; set; }
+    public EventCallback<HashSet<TItem>> SelectedOptionsChanged { get; set; }
 
     /// <summary>
     /// Represents the available options in the multiselect dropdown.
@@ -75,6 +77,12 @@ public partial class SimpleMultiselect<TItem> : ComponentBase
     public bool IsMultiSelect { get; set; } = true;
 
     /// <summary>
+    /// The id the input element should have.
+    /// </summary>
+    [Parameter]
+    public string? Id { get; set; }
+
+    /// <summary>
     /// Additional CSS classes to apply.
     /// </summary>
     [Parameter]
@@ -86,14 +94,22 @@ public partial class SimpleMultiselect<TItem> : ComponentBase
     [Parameter]
     public string? Style { get; set; }
 
+    /// <summary>
+    /// Whether or not the multiselect is disabled.
+    /// </summary>
+    [Parameter]
+    public bool Disabled { get; set; }
+
+    /// <summary>
+    /// If true, the SimpleMultiselect component will be rendered properly without needing Bootstrap.
+    /// </summary>
+    [CascadingParameter(Name = "Standalone")]
+    public bool Standalone { get; set; }
+    
     private async Task ToggleOption(TItem option)
     {
-        var newSelected = new List<TItem>(SelectedOptions);
-        if (newSelected.Contains(option))
-        {
-            newSelected.Remove(option);
-        }
-        else
+        var newSelected = new HashSet<TItem>(SelectedOptions);
+        if (!newSelected.Remove(option))
         {
             if (!IsMultiSelect)
             {
@@ -116,22 +132,35 @@ public partial class SimpleMultiselect<TItem> : ComponentBase
         return SelectedOptions.Contains(option);
     }
 
-    private IEnumerable<TItem> FilteredOptions()
+    private List<TItem>? _filteredOptionsCache;
+    private List<TItem>? _prevOptions;
+    private Func<TItem, string, bool>? _prevFilterPredicate;
+    private string? _prevFilterText;
+    private bool _prevCanFilter;
+    
+    private List<TItem> FilteredOptions()
     {
-        foreach (var option in Options)
+        if(_prevCanFilter == CanFilter && _prevFilterPredicate == FilterPredicate && _prevFilterText == _filterText && _prevOptions == Options)
         {
-            if (!CanFilter)
-            {
-                yield return option;
-                continue;
-            }
-
-            var predicate = FilterPredicate ?? DefaultFilterPredicate;
-
-            if (predicate(option, _filterText))
-            {
-                yield return option;
-            }
+            return _filteredOptionsCache ?? Options;
         }
+        
+        _prevOptions = Options;
+        _prevCanFilter = CanFilter;
+        _prevFilterPredicate = FilterPredicate;
+        _prevFilterText = _filterText;
+        
+        _filteredOptionsCache = [];
+        if(!CanFilter || string.IsNullOrWhiteSpace(_filterText))
+        {
+            _filteredOptionsCache.AddRange(Options);
+        }
+        else
+        {
+            var predicate = FilterPredicate ?? DefaultFilterPredicate;
+            _filteredOptionsCache.AddRange(Options.Where(option => predicate(option, _filterText)));
+        }
+        
+        return _filteredOptionsCache;
     }
 }

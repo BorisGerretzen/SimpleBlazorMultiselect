@@ -1,5 +1,4 @@
 ﻿@page "/ObjectBinding"
-@using SimpleBlazorMultiselect.Demo.Models
 <SimpleMultiselect Options="_people"
                    @bind-SelectedOptions="_selectedPeople"
                    StringSelector="person => person.Name" />
@@ -13,12 +12,14 @@
 </ul>
 
 @code {
-    private List<Person> _people = new()
-    {
-        new Person { Name = "Alice", Age = 30 },
-        new Person { Name = "Bob", Age = 25 },
-        new Person { Name = "Charlie", Age = 35 }
-    };
+    private record Person(string Name, int Age);
 
-    private List<Person> _selectedPeople = new();
+    private readonly List<Person> _people =
+    [
+        new("Alice", 30),
+        new("Bob", 25),
+        new("Charlie", 35)
+    ];
+
+    private HashSet<Person> _selectedPeople = [];
 }

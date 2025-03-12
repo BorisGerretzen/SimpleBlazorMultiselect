@@ -1,90 +1,144 @@
 ﻿/* Dropdown Container */
-.dropdown-container {
+.simple-dropdown {
+    font-size:16px;
     position: relative;
     display: inline-block;
     width: 100%;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.simple-bs-compat {
+    --bs-btn-border-radius: 6px;
+    --bs-btn-bg: #fff;
+    --bs-btn-border-color: #6c757d;
+    --bs-btn-hover-bg: #e9ecef;
+    --bs-btn-disabled-border-color: #6c757d;
+    --bs-btn-disabled-bg: #6c757d;
+    --bs-dropdown-zindex: 1000;
+    --bs-dropdown-min-width: 10rem;
+    --bs-dropdown-color: #000;
+    --bs-dropdown-bg: #fff;
+    --bs-dropdown-border-color: var(--bs-btn-border-color);
+    --bs-dropdown-border-radius: var(--bs-btn-border-radius);
+    --bs-dropdown-link-color: #000;
+    --bs-dropdown-link-hover-bg: var(--bs-btn-hover-bg);
+    --bs-dropdown-link-active-bg: #0d6efd;
+    --bs-dropdown-link-active-color: #fff;
 }
 
 /* Dropdown Button */
-.dropdown-button {
-    background-color: #f8f9fa;
-    border: 1px solid #6c757d;
-    padding: 0.5rem 1rem;
+.simple-dropdown-button {
+    background-color: var(--bs-btn-bg);
+    font-size: inherit;
+    border: 1px solid var(--bs-btn-border-color);
+    padding: 0.375rem 0.75rem;
     cursor: pointer;
     width: 100%;
     text-align: left;
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
+    border-radius: var(--bs-btn-border-radius);
+    line-height: 1.5;
 
-    .dropdown-button:hover {
-        background-color: #e9ecef;
+    &:hover {
+        background-color: var(--bs-btn-hover-bg);
     }
 
-/* Dropdown Arrow */
-.dropdown-arrow {
-    margin-left: 8px;
-    transition: transform 0.2s ease-in-out;
+    &:focus {
+        outline: 0;
+        box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    }
+
+    &:disabled {
+        background-color: var(--bs-btn-disabled-bg);
+        color: var(--bs-btn-disabled-color);
+        cursor: default;
+    }
 }
 
-    .dropdown-arrow.open {
-        transform: rotate(180deg);
+.simple-dropdown-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &::after {
+        display: inline-block;
+        margin-left: .255em;
+        vertical-align: .255em;
+        content: "";
+        border-top: .3em solid;
+        border-right: .3em solid transparent;
+        border-bottom: 0;
+        border-left: .3em solid transparent;
+        position: absolute;
+        right: 0.75rem;
+        top: 50%;
+        margin-top: -2px;
     }
+}
 
 /* Dropdown Menu */
-.dropdown-menu-container {
+.dropdown-menu {
     position: absolute;
-    z-index: 1000;
-    background-color: #fff;
-    border: 1px solid #6c757d;
+    padding-top: 0;
+    border-radius: var(--bs-dropdown-border-radius);
+    z-index: var(--bs-dropdown-zindex);
+    background-color: var(--bs-dropdown-bg);
+    border: 1px solid var(--bs-dropdown-border-color);
+    color: var(--bs-dropdown-color);
     width: 100%;
+    min-width: var(--bs-dropdown-min-width);
     max-height: 200px;
     overflow-y: auto;
 }
 
 /* Filter Input */
-.filter-container {
+.simple-filter-container {
     position: sticky;
     top: 0;
     z-index: 1;
-    background-color: white;
+    background-color: var(--bs-dropdown-bg);
     padding: 8px 10px;
 }
 
-.filter-input {
+.simple-filter-input {
     width: 100%;
+    box-sizing: border-box;
     padding: 0.375rem 0.75rem;
-    font-size: 1rem;
     font-weight: 400;
+    font-size: 1rem;
     line-height: 1.5;
-    color: #212529;
-    background-color: #fff;
+    color: var(--bs-dropdown-link-color);
+    background-color: var(--bs-dropdown-bg);
     background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: 0.25rem;
+    border: 1px solid var(--bs-dropdown-border-color);
+    border-radius: var(--bs-dropdown-border-radius);
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 /* Dropdown Items */
 .dropdown-item {
-    padding: 0.5rem 1rem;
+    padding: 0.25rem 1rem;
     cursor: pointer;
     user-select: none;
-    color: #000000;
-}
+    color: var(--bs-dropdown-link-color);
 
-    .dropdown-item:hover {
-        background-color: #f8f9fa;
+    &:hover {
+        background-color: var(--bs-dropdown-link-hover-bg);
     }
-
-    .dropdown-item label {
-        display: flex;
-        align-items: center;
+    
+    &:active {
+        color: var(--bs-dropdown-link-active-color);
+        background-color: var(--bs-dropdown-link-active-bg);
+    }
+    
+    & label {
         cursor: pointer;
-        color: #000000;
     }
-
-    .dropdown-item input[type="checkbox"] {
+    
+    & input[type="checkbox"] {
         margin-right: 0.5rem;
     }
+}

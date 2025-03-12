@@ -1,16 +1,16 @@
 ﻿@using Microsoft.JSInterop
-@using System.Diagnostics
 @inject IJSRuntime JsRuntime
 @typeparam TItem
 @implements IAsyncDisposable
 
-<div class="dropdown-container w-100 simple-dropdown @(Class ?? "")"
+<div class="simple-dropdown @(Standalone || SimpleMultiselectGlobals.Standalone ? "simple-bs-compat" : "") @(Class ?? "")"
      style="@(string.IsNullOrEmpty(Style) ? "" : Style)"
-     @ref="dropdownContainerRef">
-    <button class="dropdown-button w-100 text-truncate text-start" type="button"
-            id="dropdownMenuButton" @onclick="ToggleDropdown"
-            aria-expanded="@isDropdownOpen">
-        <span class="dropdown-text">
+     @ref="_dropdownContainerRef">
+    <button class="simple-dropdown-button btn dropdown-toggle" type="button"
+            id="@Id"
+            @onclick="ToggleDropdown"
+            aria-expanded="@_isDropdownOpen">
+        <span class="simple-dropdown-text">
             @if (SelectedOptions.Count == 0)
             {
                 @DefaultText
@@ -24,31 +24,30 @@
                 @SelectedOptionsRenderer(SelectedOptions)
             }
         </span>
-        <span class="dropdown-arrow @(isDropdownOpen ? "open" : "")">&#9662;</span>
     </button>
 
-    @if (isDropdownOpen)
+
+    @if (_isDropdownOpen)
     {
-        <div class="dropdown-menu-container w-100">
+        var options = FilteredOptions();
+        <div class="dropdown-menu show">
             @if (CanFilter)
             {
-                <div class="filter-container">
-                    <div>
-                        <input type="text" class="filter-input" placeholder="Filter..."
-                               @bind="_filterText" @bind:event="oninput" />
-                    </div>
+                <div class="simple-filter-container">
+                    <input type="text" class="simple-filter-input form-control" placeholder="Filter..."
+                           @bind="_filterText" @bind:event="oninput"/>
                 </div>
             }
 
             @if (Virtualize)
             {
-                <Virtualize Items="FilteredOptions().ToList()" Context="option">
+                <Virtualize Items="@(options)" Context="option">
                     @RenderItem(option)
                 </Virtualize>
             }
             else
             {
-                foreach (var option in FilteredOptions())
+                foreach (var option in options)
                 {
                     @RenderItem(option)
                 }
@@ -59,24 +58,24 @@
 
 @code {
     private string _filterText = "";
-    private bool isDropdownOpen = false;
-    private ElementReference dropdownContainerRef;
-    private DotNetObjectReference<SimpleMultiselect<TItem>>? dotNetHelper;
-    private IJSObjectReference? module;
-    private IJSObjectReference? clickHandler;
+    private bool _isDropdownOpen = false;
+    private ElementReference _dropdownContainerRef;
+    private DotNetObjectReference<SimpleMultiselect<TItem>>? _dotNetHelper;
+    private IJSObjectReference? _module;
+    private IJSObjectReference? _clickHandler;
 
     protected override void OnInitialized()
     {
-        dotNetHelper = DotNetObjectReference.Create(this);
+        _dotNetHelper = DotNetObjectReference.Create(this);
     }
 
     private async Task ToggleDropdown()
     {
-        isDropdownOpen = !isDropdownOpen;
-        if (isDropdownOpen)
+        _isDropdownOpen = !_isDropdownOpen;
+        if (_isDropdownOpen)
         {
-            module ??= await JsRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/SimpleBlazorMultiselect/js/simpleMultiselect.js");
-            clickHandler = await module.InvokeAsync<IJSObjectReference>("register", dotNetHelper, dropdownContainerRef);
+            _module ??= await JsRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/SimpleBlazorMultiselect/js/simpleMultiselect.js");
+            _clickHandler = await _module.InvokeAsync<IJSObjectReference>("register", _dotNetHelper, _dropdownContainerRef);
         }
         else
         {
@@ -87,35 +86,37 @@
     [JSInvokable]
     public async Task CloseDropdown()
     {
-        if (clickHandler != null)
+        if (_clickHandler != null)
         {
-            await clickHandler.InvokeVoidAsync("dispose");
-            clickHandler = null;
+            await _clickHandler.InvokeVoidAsync("dispose");
+            _clickHandler = null;
         }
-        isDropdownOpen = false;
+
+        _isDropdownOpen = false;
         await InvokeAsync(StateHasChanged);
     }
 
-
-
     private RenderFragment<TItem> RenderItem => item =>
-    @<div class="dropdown-item" @onclick="() => ToggleOption(item)">
-        <label @onclick:stopPropagation="true">
-            <input type="checkbox" checked="@IsOptionSelected(item)"
-                   @onchange="() => ToggleOption(item)" /> @StringSelector(item)
-        </label>
-    </div>;
+        @<div class="dropdown-item" @onclick="() => ToggleOption(item)">
+            <label @onclick:stopPropagation="true">
+                <input type="checkbox" checked="@IsOptionSelected(item)"
+                       @onchange="() => ToggleOption(item)"/> @StringSelector(item)
+            </label>
+        </div>;
 
     public async ValueTask DisposeAsync()
     {
-        if (clickHandler != null)
+        if (_clickHandler != null)
         {
-            await clickHandler.InvokeVoidAsync("dispose");
+            await _clickHandler.InvokeVoidAsync("dispose");
         }
-        if (module != null)
+
+        if (_module != null)
         {
-            await module.DisposeAsync();
+            await _module.DisposeAsync();
         }
-        dotNetHelper?.Dispose();
+
+        _dotNetHelper?.Dispose();
     }
+
 }

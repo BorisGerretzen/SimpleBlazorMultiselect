@@ -9,18 +9,19 @@
 #
 #     - To trigger manual generation invoke:
 #
-#         nuke --generate-configuration GitHubActions_publish_demo --host GitHubActions
+#         nuke --generate-configuration GitHubActions_publish --host GitHubActions
 #
 # </auto-generated>
 # ------------------------------------------------------------------------------
 
-name: publish_demo
+name: publish
 
-on: [workflow_dispatch]
-
-permissions:
-  contents: write
-  pages: write
+on:
+  workflow_dispatch:
+    inputs:
+      PackageVersion:
+        description: "Package Version"
+        required: true
 
 jobs:
   ubuntu-latest:
@@ -37,12 +38,8 @@ jobs:
             .nuke/temp
             ~/.nuget/packages
           key: ${{ runner.os }}-${{ hashFiles('**/global.json', '**/*.csproj', '**/Directory.Packages.props') }}
-      - name: 'Run: Clean, BuildDemo, DeployDemo'
-        run: ./build.cmd Clean BuildDemo DeployDemo
+      - name: 'Run: Pack, Push'
+        run: ./build.cmd Pack Push
         env:
-          TokenGithub: ${{ secrets.TOKEN_GITHUB }}
-      - name: 'Publish: demo.zip'
-        uses: actions/upload-artifact@v4
-        with:
-          name: demo.zip
-          path: artifacts/demo.zip
+          PackageVersion: ${{ github.event.inputs.PackageVersion }}
+          NugetApiKey: ${{ secrets.NUGET_API_KEY }}
