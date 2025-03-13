@@ -10,15 +10,15 @@ You can find the Nuget package [here](https://www.nuget.org/packages/SimpleBlazo
 ```bash
 dotnet add package SimpleBlazorMultiselect
 ```
+> [!IMPORTANT]
+> If you want to use the project without Bootstrap, set `SimpleMultiselectGlobals.Standalone` to `true` in your `Program.cs` file.
+> Alternatively you can use a cascading parameter with name `Standalone` around the component.
+
 
 ## Usage
 See the project `SimpleBlazorMultiselectDemo` for more examples of how to use the component, 
 or take a look at the properties page on the [wiki](https://github.com/BorisGerretzen/SimpleBlazorMultiselect/wiki/Properties).
 You can also view a live demo [here](https://borisgerretzen.github.io/SimpleBlazorMultiselect/).
-
-> [!IMPORTANT]
-> If you want to use the project without Bootstrap, set `SimpleMultiselectGlobals.Standalone` to `true` in your `Program.cs` file.
-> Alternatively you can use a cascading parameter with name `Standalone` around the component.
 
 Below are some short examples, they all use the following `@code` block:
 ```csharp
@@ -65,5 +65,6 @@ Below are some short examples, they all use the following `@code` block:
 ![image](https://github.com/BorisGerretzen/SimpleBlazorMultiselect/assets/15902678/5f54049a-23c0-428b-992f-7735cffb985f)
 
 ### Bootstrap dark mode
+This demonstrates the dark mode of the dropdown when Bootstrap is set to dark mode.
 ![image](https://github.com/user-attachments/assets/8613cd7a-cf6f-4116-b5f6-c0ee2b995fa6)
 

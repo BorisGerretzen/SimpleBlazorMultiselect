@@ -46,7 +46,7 @@ public partial class SimpleMultiselect<TItem> : ComponentBase
     public RenderFragment<IEnumerable<TItem>>? SelectedOptionsRenderer { get; set; }
 
     /// <summary>
-    /// Whether or not the dropdown should be filterable.
+    /// Whether the dropdown should be filterable.
     /// </summary>
     [Parameter]
     public bool CanFilter { get; set; }
@@ -65,13 +65,13 @@ public partial class SimpleMultiselect<TItem> : ComponentBase
     }
 
     /// <summary>
-    /// Whether or not the virtualize component should be used to render the options.
+    /// Whether the virtualize component should be used to render the options.
     /// </summary>
     [Parameter]
     public bool Virtualize { get; set; }
 
     /// <summary>
-    /// Whether or not the multiselect should allow multiple selections.
+    /// Whether the multiselect should allow multiple selections.
     /// </summary>
     [Parameter]
     public bool IsMultiSelect { get; set; } = true;
@@ -95,7 +95,7 @@ public partial class SimpleMultiselect<TItem> : ComponentBase
     public string? Style { get; set; }
 
     /// <summary>
-    /// Whether or not the multiselect is disabled.
+    /// Whether the multiselect is disabled.
     /// </summary>
     [Parameter]
     public bool Disabled { get; set; }
