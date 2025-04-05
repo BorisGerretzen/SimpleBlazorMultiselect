@@ -212,7 +212,7 @@ main[b-5287nmq64r] {
     }
 }
 /* /Pages/CustomStyling.razor.rz.scp.css */
-[b-j68ykq3v4j] .simple-dropdown .dropdown-button {
+[b-j68ykq3v4j] .simple-dropdown .simple-dropdown-button {
     color: red;
     background-color: black;
     border: 10px solid green;
@@ -241,9 +241,9 @@ main[b-5287nmq64r] {
     color: red;
 }
 
-    [b-j68ykq3v4j] .simple-dropdown .dropdown-item:hover {
-        background-color: yellow;
-    }
+[b-j68ykq3v4j] .simple-dropdown .dropdown-item:hover {
+    background-color: yellow;
+}
 
 @keyframes rainbow-b-j68ykq3v4j {
     0%, 100% {
