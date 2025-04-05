@@ -1,5 +1,7 @@
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 h1:focus {
@@ -100,4 +102,14 @@ a, .btn-link {
 
 code {
     color: #c02d76;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.row .col-4 {
+    width: 30%;
+    padding: 0 0.5rem;
 }

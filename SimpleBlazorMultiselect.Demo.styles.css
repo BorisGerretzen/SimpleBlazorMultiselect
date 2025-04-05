@@ -117,11 +117,16 @@ main[b-5287nmq64r] {
 
 .top-row[b-mojlqp5qvc] {
     height: 3.5rem;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .navbar-brand[b-mojlqp5qvc] {
     font-size: 1.1rem;
+    text-decoration: none;
+    color: white;
 }
 
 .bi[b-mojlqp5qvc] {
@@ -149,35 +154,38 @@ main[b-5287nmq64r] {
 .nav-item[b-mojlqp5qvc] {
     font-size: 0.9rem;
     padding-bottom: 0.5rem;
+    overflow-x: hidden;
 }
 
-    .nav-item:first-of-type[b-mojlqp5qvc] {
-        padding-top: 1rem;
-    }
+.nav-item:first-of-type[b-mojlqp5qvc] {
+    padding-top: 1rem;
+}
 
-    .nav-item:last-of-type[b-mojlqp5qvc] {
-        padding-bottom: 1rem;
-    }
+.nav-item:last-of-type[b-mojlqp5qvc] {
+    padding-bottom: 1rem;
+}
 
-    .nav-item[b-mojlqp5qvc]  .nav-link {
-        color: #d7d7d7;
-        background: none;
-        border: none;
-        border-radius: 4px;
-        height: 3rem;
-        display: flex;
-        align-items: center;
-        line-height: 3rem;
-        width: 100%;
-    }
+.nav-item[b-mojlqp5qvc]  .nav-link {
+    color: #d7d7d7;
+    background: none;
+    border: none;
+    border-radius: 4px;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    line-height: 3rem;
+    width: 100%;
+    text-decoration: none;
+    padding-left: 1rem;
+}
 
 .nav-item[b-mojlqp5qvc]  a.active {
-    background-color: rgba(255,255,255,0.37);
+    background-color: rgba(255, 255, 255, 0.37);
     color: white;
 }
 
 .nav-item[b-mojlqp5qvc]  .nav-link:hover {
-    background-color: rgba(255,255,255,0.1);
+    background-color: rgba(255, 255, 255, 0.1);
     color: white;
 }
 
@@ -204,57 +212,85 @@ main[b-5287nmq64r] {
     }
 }
 /* /Pages/CustomStyling.razor.rz.scp.css */
-[b-j68ykq3v4j] .simple-dropdown .btn-outline-secondary {
-    --bs-btn-color: red;
-    --bs-btn-bg: black;
-    --bs-btn-border-color: green;
-    --bs-btn-border-width: 10px;
+[b-j68ykq3v4j] .simple-dropdown .dropdown-button {
+    color: red;
+    background-color: black;
+    border: 10px solid green;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    animation: rainbow-b-j68ykq3v4j 2.5s linear infinite;
+}
 
-    animation: rainbow-b-j68ykq3v4j 2.5s linear;
-    animation-iteration-count: infinite;
+[b-j68ykq3v4j] .simple-dropdown .dropdown-menu-container {
+    position: absolute;
+    z-index: 1000;
+    background-color: white;
+    border: 1px solid #6c757d;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 [b-j68ykq3v4j] .simple-dropdown .dropdown-item {
-    --bs-btn-color: red;
-    --bs-dropdown-link-hover-bg: yellow;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    user-select: none;
+    color: red;
 }
 
+    [b-j68ykq3v4j] .simple-dropdown .dropdown-item:hover {
+        background-color: yellow;
+    }
 
-@keyframes rainbow-b-j68ykq3v4j{
-    100%,0%{
-        --bs-btn-color: rgb(255,0,0);
+@keyframes rainbow-b-j68ykq3v4j {
+    0%, 100% {
+        color: rgb(255, 0, 0);
     }
-    8%{
-        --bs-btn-color: rgb(255,127,0);
+
+    8% {
+        color: rgb(255, 127, 0);
     }
-    16%{
-        --bs-btn-color: rgb(255,255,0);
+
+    16% {
+        color: rgb(255, 255, 0);
     }
-    25%{
-        --bs-btn-color: rgb(127,255,0);
+
+    25% {
+        color: rgb(127, 255, 0);
     }
-    33%{
-        --bs-btn-color: rgb(0,255,0);
+
+    33% {
+        color: rgb(0, 255, 0);
     }
-    41%{
-        --bs-btn-color: rgb(0,255,127);
+
+    41% {
+        color: rgb(0, 255, 127);
     }
-    50%{
-        --bs-btn-color: rgb(0,255,255);
+
+    50% {
+        color: rgb(0, 255, 255);
     }
-    58%{
-        --bs-btn-color: rgb(0,127,255);
+
+    58% {
+        color: rgb(0, 127, 255);
     }
-    66%{
-        --bs-btn-color: rgb(0,0,255);
+
+    66% {
+        color: rgb(0, 0, 255);
     }
-    75%{
-        --bs-btn-color: rgb(127,0,255);
+
+    75% {
+        color: rgb(127, 0, 255);
     }
-    83%{
-        --bs-btn-color: rgb(255,0,255);
+
+    83% {
+        color: rgb(255, 0, 255);
     }
-    91%{
-        --bs-btn-color: rgb(255,0,127);
+
+    91% {
+        color: rgb(255, 0, 127);
     }
 }
