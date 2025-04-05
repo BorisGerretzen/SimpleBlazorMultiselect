@@ -40,7 +40,7 @@ jobs:
       - name: 'Run: Clean, BuildDemo, DeployDemo'
         run: ./build.cmd Clean BuildDemo DeployDemo
         env:
-          TokenGithub: ${{ secrets.TOKEN_GITHUB }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: 'Publish: demo.zip'
         uses: actions/upload-artifact@v4
         with:

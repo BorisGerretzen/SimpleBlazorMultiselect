@@ -132,11 +132,6 @@
         "Solution": {
           "type": "string",
           "description": "Path to a solution file that is automatically loaded"
-        },
-        "TokenGithub": {
-          "type": "string",
-          "description": "Github token",
-          "default": "Secrets must be entered via 'nuke :secrets [profile]'"
         }
       }
     },
