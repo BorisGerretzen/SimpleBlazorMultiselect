@@ -219,7 +219,7 @@ class Build : NukeBuild
             DotNetNuGetPush(s => s
                 .SetSource(NugetSource)
                 .SetApiKey(NugetApiKey)
-                .CombineWith(ArtifactsDirectory.GlobFiles("*.nupkg", "*.snupkg"), (s, v) => s
+                .CombineWith(ArtifactsDirectory.GlobFiles("*.nupkg"), (s, v) => s
                     .SetTargetPath(v)
                 )
             );
