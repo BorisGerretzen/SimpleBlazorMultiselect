@@ -28,7 +28,8 @@ using Project = Nuke.Common.ProjectModel.Project;
     On = [GitHubActionsTrigger.WorkflowDispatch], 
     InvokedTargets = [nameof(Clean), nameof(BuildDemo), nameof(DeployDemo)], 
     FetchDepth = 10000, 
-    WritePermissions = [GitHubActionsPermissions.Contents, GitHubActionsPermissions.Pages]
+    WritePermissions = [GitHubActionsPermissions.Contents, GitHubActionsPermissions.Pages],
+    EnableGitHubToken = true
 )]
 class Build : NukeBuild
 {
