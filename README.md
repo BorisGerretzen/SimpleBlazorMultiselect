@@ -1,28 +1,30 @@
 # Simple blazor multiselect
-This package contains a simple blazor dropdown component that supports single and multiple selection.
+[![NuGet](https://img.shields.io/nuget/v/SimpleBlazorMultiselect.svg)](https://www.nuget.org/packages/SimpleBlazorMultiselect/)
+[![Static Badge](https://img.shields.io/badge/View%20demo-6c757d)](https://borisgerretzen.github.io/SimpleBlazorMultiselect/)
+
+This package contains a simple Blazor dropdown component that supports single and multiple selection.
+It is compatible with Bootstrap in the sense that if you include Bootstrap in your project, the dropdown will look and feel like a Bootstrap dropdown including dark mode.
 
 ## Installation
-1. Add the following to your `_Imports.razor` file:
-    ```csharp
-    @using SimpleBlazorMultiselect
-    ```
+You can find the Nuget package [here](https://www.nuget.org/packages/SimpleBlazorMultiselect/), install it using the following command:
+```bash
+dotnet add package SimpleBlazorMultiselect
+```
+> [!IMPORTANT]
+> If you want to use the project without Bootstrap, set `SimpleMultiselectGlobals.Standalone` to `true` in your `Program.cs` file.
+> Alternatively you can use a cascading parameter with name `Standalone` around the component.
 
-2. Add the following to the `<head>` of your `App.razor` or `index.html` file:
-    ```html
-    <link rel="stylesheet" href="_content/SimpleBlazorMultiselect/bootstrap.min.css"/>
-    <script src="_content/SimpleBlazorMultiselect/bootstrap.bundle.min.js"></script>
-    ```
 
 ## Usage
 See the project `SimpleBlazorMultiselectDemo` for more examples of how to use the component, 
 or take a look at the properties page on the [wiki](https://github.com/BorisGerretzen/SimpleBlazorMultiselect/wiki/Properties).
-The demo project is hosted on [GitHub Pages](https://borisgerretzen.github.io/SimpleBlazorMultiselect/).
+You can also view a live demo [here](https://borisgerretzen.github.io/SimpleBlazorMultiselect/).
 
 Below are some short examples, they all use the following `@code` block:
 ```csharp
 @code {
-    private readonly List<string> _items = new() { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8", "Item 9", "Item 10" };
-    private List<string> _selectedItems = new();
+    private readonly List<string> _items = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 6", "Item 7", "Item 8", "Item 9", "Item 10" ];
+    private HashSet<string> _selectedItems = new();
 }
 ```
 
@@ -61,3 +63,8 @@ Below are some short examples, they all use the following `@code` block:
         CanFilter="true"/>
 ```
 ![image](https://github.com/BorisGerretzen/SimpleBlazorMultiselect/assets/15902678/5f54049a-23c0-428b-992f-7735cffb985f)
+
+### Bootstrap dark mode
+This demonstrates the dark mode of the dropdown when Bootstrap is set to dark mode.
+![image](https://github.com/user-attachments/assets/8613cd7a-cf6f-4116-b5f6-c0ee2b995fa6)
+

@@ -1,54 +1,82 @@
-::deep .simple-dropdown .btn-outline-secondary {
-    --bs-btn-color: red;
-    --bs-btn-bg: black;
-    --bs-btn-border-color: green;
-    --bs-btn-border-width: 10px;
+::deep .simple-dropdown .dropdown-button {
+    color: red;
+    background-color: black;
+    border: 10px solid green;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    animation: rainbow 2.5s linear infinite;
+}
 
-    animation: rainbow 2.5s linear;
-    animation-iteration-count: infinite;
+::deep .simple-dropdown .dropdown-menu-container {
+    position: absolute;
+    z-index: 1000;
+    background-color: white;
+    border: 1px solid #6c757d;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 ::deep .simple-dropdown .dropdown-item {
-    --bs-btn-color: red;
-    --bs-dropdown-link-hover-bg: yellow;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    user-select: none;
+    color: red;
 }
 
+    ::deep .simple-dropdown .dropdown-item:hover {
+        background-color: yellow;
+    }
 
-@keyframes rainbow{
-    100%,0%{
-        --bs-btn-color: rgb(255,0,0);
+@keyframes rainbow {
+    0%, 100% {
+        color: rgb(255, 0, 0);
     }
-    8%{
-        --bs-btn-color: rgb(255,127,0);
+
+    8% {
+        color: rgb(255, 127, 0);
     }
-    16%{
-        --bs-btn-color: rgb(255,255,0);
+
+    16% {
+        color: rgb(255, 255, 0);
     }
-    25%{
-        --bs-btn-color: rgb(127,255,0);
+
+    25% {
+        color: rgb(127, 255, 0);
     }
-    33%{
-        --bs-btn-color: rgb(0,255,0);
+
+    33% {
+        color: rgb(0, 255, 0);
     }
-    41%{
-        --bs-btn-color: rgb(0,255,127);
+
+    41% {
+        color: rgb(0, 255, 127);
     }
-    50%{
-        --bs-btn-color: rgb(0,255,255);
+
+    50% {
+        color: rgb(0, 255, 255);
     }
-    58%{
-        --bs-btn-color: rgb(0,127,255);
+
+    58% {
+        color: rgb(0, 127, 255);
     }
-    66%{
-        --bs-btn-color: rgb(0,0,255);
+
+    66% {
+        color: rgb(0, 0, 255);
     }
-    75%{
-        --bs-btn-color: rgb(127,0,255);
+
+    75% {
+        color: rgb(127, 0, 255);
     }
-    83%{
-        --bs-btn-color: rgb(255,0,255);
+
+    83% {
+        color: rgb(255, 0, 255);
     }
-    91%{
-        --bs-btn-color: rgb(255,0,127);
+
+    91% {
+        color: rgb(255, 0, 127);
     }
 }

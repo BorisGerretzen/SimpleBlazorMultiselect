@@ -17,31 +17,32 @@ using Octokit.Internal;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 using Project = Nuke.Common.ProjectModel.Project;
 
-[GitHubActions("test", GitHubActionsImage.UbuntuLatest, On = new[] { GitHubActionsTrigger.PullRequest, GitHubActionsTrigger.WorkflowDispatch }, InvokedTargets = new[] { nameof(Test) }, FetchDepth = 10000)]
-[GitHubActions("publish", GitHubActionsImage.UbuntuLatest, On = new[] { GitHubActionsTrigger.WorkflowDispatch }, InvokedTargets = new[] { nameof(Pack), nameof(Push) }, ImportSecrets = new[] { nameof(NugetApiKey) }, FetchDepth = 10000)]
+[GitHubActions("publish", 
+    GitHubActionsImage.UbuntuLatest, 
+    InvokedTargets = [nameof(Pack), nameof(Push)], 
+    ImportSecrets = [nameof(NugetApiKey)], 
+    FetchDepth = 10000, 
+    OnWorkflowDispatchRequiredInputs = [nameof(PackageVersion)])]
 [GitHubActions("publish demo", 
     GitHubActionsImage.UbuntuLatest, 
-    On = new[] { GitHubActionsTrigger.WorkflowDispatch }, 
-    InvokedTargets = new[] { nameof(Clean), nameof(BuildDemo), nameof(DeployDemo) }, 
+    On = [GitHubActionsTrigger.WorkflowDispatch], 
+    InvokedTargets = [nameof(Clean), nameof(BuildDemo), nameof(DeployDemo)], 
     FetchDepth = 10000, 
-    ImportSecrets = new[] {nameof(TokenGithub)},
-    WritePermissions = new[] { GitHubActionsPermissions.Contents, GitHubActionsPermissions.Pages }
-    )]
+    ImportSecrets = [nameof(TokenGithub)],
+    WritePermissions = [GitHubActionsPermissions.Contents, GitHubActionsPermissions.Pages]
+)]
 class Build : NukeBuild
 {
     [Nuke.Common.Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")] readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
-
-    [GitVersion] readonly GitVersion GitVersion;
-
+    
     [Nuke.Common.Parameter("API Key for the NuGet server.")] [Secret] readonly string NugetApiKey;
 
     [Nuke.Common.Parameter("NuGet server URL.")] readonly string NugetSource = "https://api.nuget.org/v3/index.json";
-
     [Nuke.Common.Parameter("NuGet package version.")] readonly string PackageVersion;
     
     [Nuke.Common.Parameter("Github token.")] [Secret] readonly string TokenGithub;
     [Nuke.Common.Parameter("Base url.")] readonly string BaseUrl = "/SimpleBlazorMultiselect/";
-
+    
     [GitRepository] readonly GitRepository Repository;
 
     [Solution] readonly Solution Solution;
@@ -85,9 +86,6 @@ class Build : NukeBuild
                 .EnableNoRestore()
                 .SetProjectFile(Solution)
                 .SetConfiguration(Configuration)
-                .SetAssemblyVersion(GitVersion.AssemblySemVer)
-                .SetFileVersion(GitVersion.AssemblySemFileVer)
-                .SetInformationalVersion(GitVersion.InformationalVersion)
                 .CombineWith(
                     from project in new[] { LibProject, DemoProject }
                     from framework in project.GetTargetFrameworks()
@@ -108,9 +106,6 @@ class Build : NukeBuild
                 .EnableNoRestore()
                 .EnableNoBuild()
                 .SetConfiguration(Configuration)
-                .SetAssemblyVersion(GitVersion.AssemblySemVer)
-                .SetFileVersion(GitVersion.AssemblySemFileVer)
-                .SetInformationalVersion(GitVersion.InformationalVersion)
                 .SetProject(DemoProject)
                 .SetOutput(DemoDirectory)
             );
@@ -200,23 +195,10 @@ class Build : NukeBuild
             await client.Git.Reference.Update(repoOwner, repoName, "heads/gh-pages", new ReferenceUpdate(commitRef.Sha));
             Console.WriteLine("Reference updated");
         });
-    
-    Target Test => _ => _
-        .DependsOn(Compile)
-        .Executes(() =>
-        {
-            DotNetTest(s => s
-                .SetProjectFile(Solution)
-                .SetConfiguration(Configuration)
-                .SetFramework("net8.0")
-                .EnableNoRestore()
-                .EnableNoBuild()
-            );
-        });
 
     // ReSharper disable once UnusedMember.Local
     Target Pack => _ => _
-        .DependsOn(Clean, Test)
+        .DependsOn(Clean, Compile)
         .Before(Push)
         .Requires(() => Configuration == Configuration.Release)
         .Executes(() =>
@@ -227,7 +209,7 @@ class Build : NukeBuild
                 .SetProject(LibProject)
                 .SetConfiguration(Configuration)
                 .SetOutputDirectory(ArtifactsDirectory)
-                .SetProperty("PackageVersion", PackageVersion ?? GitVersion.NuGetVersionV2)
+                .SetProperty("PackageVersion", PackageVersion)
             );
         });
 
@@ -238,11 +220,11 @@ class Build : NukeBuild
             DotNetNuGetPush(s => s
                 .SetSource(NugetSource)
                 .SetApiKey(NugetApiKey)
-                .CombineWith(ArtifactsDirectory.GlobFiles("*.nupkg"), (s, v) => s
+                .CombineWith(ArtifactsDirectory.GlobFiles("*.nupkg", "*.snupkg"), (s, v) => s
                     .SetTargetPath(v)
                 )
             );
         });
 
-    public static int Main() => Execute<Build>(x => x.Test);
+    public static int Main() => Execute<Build>(x => x.Pack);
 }

@@ -1,104 +1,122 @@
 ﻿@using Microsoft.JSInterop
-@using System.Diagnostics
 @inject IJSRuntime JsRuntime
 @typeparam TItem
+@implements IAsyncDisposable
 
-<div class="btn-group w-100 simple-dropdown @(Class ?? "")" style="@(Style ?? "")">
-    <button class="btn btn-outline-secondary dropdown-toggle w-100 text-truncate text-start" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-        @if (SelectedOptions.Count == 0)
-        {
-            @DefaultText
-        }
-        else if (SelectedOptionsRenderer == null)
-        {
-            @string.Join(", ", SelectedOptions.Select(StringSelector))
-        }
-        else
-        {
-            @SelectedOptionsRenderer(SelectedOptions)
-        }
-    </button>
-    <div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
-        @if (CanFilter)
-        {
-            <div class="filter-container">
-                <div>
-                    <input type="text" class="form-control" placeholder="Filter..." @bind="_filterText" @bind:event="oninput"/>
-                </div>
-            </div>
-        }
-
-        @if (Virtualize)
-        {
-            <Virtualize Items="FilteredOptions().ToList()" Context="option">
-                @RenderItem(option)
-            </Virtualize>
-        }
-        else
-        {
-            foreach (var option in FilteredOptions())
+<div class="simple-dropdown @(Standalone || SimpleMultiselectGlobals.Standalone ? "simple-bs-compat" : "") @(Class ?? "")"
+     style="@(string.IsNullOrEmpty(Style) ? "" : Style)"
+     @ref="_dropdownContainerRef">
+    <button class="simple-dropdown-button btn dropdown-toggle" type="button"
+            id="@Id"
+            @onclick="ToggleDropdown"
+            aria-expanded="@_isDropdownOpen">
+        <span class="simple-dropdown-text">
+            @if (SelectedOptions.Count == 0)
             {
-                @RenderItem(option)
+                @DefaultText
             }
-        }
-    </div>
-</div>
+            else if (SelectedOptionsRenderer == null)
+            {
+                @string.Join(", ", SelectedOptions.Select(StringSelector))
+            }
+            else
+            {
+                @SelectedOptionsRenderer(SelectedOptions)
+            }
+        </span>
+    </button>
 
+
+    @if (_isDropdownOpen)
+    {
+        var options = FilteredOptions();
+        <div class="dropdown-menu show">
+            @if (CanFilter)
+            {
+                <div class="simple-filter-container">
+                    <input type="text" class="simple-filter-input form-control" placeholder="Filter..."
+                           @bind="_filterText" @bind:event="oninput"/>
+                </div>
+            }
+
+            @if (Virtualize)
+            {
+                <Virtualize Items="@(options)" Context="option">
+                    @RenderItem(option)
+                </Virtualize>
+            }
+            else
+            {
+                foreach (var option in options)
+                {
+                    @RenderItem(option)
+                }
+            }
+        </div>
+    }
+</div>
 
 @code {
     private string _filterText = "";
+    private bool _isDropdownOpen = false;
+    private ElementReference _dropdownContainerRef;
+    private DotNetObjectReference<SimpleMultiselect<TItem>>? _dotNetHelper;
+    private IJSObjectReference? _module;
+    private IJSObjectReference? _clickHandler;
 
-    private bool IsOptionSelected(TItem option)
+    protected override void OnInitialized()
     {
-        return SelectedOptions.Contains(option);
+        _dotNetHelper = DotNetObjectReference.Create(this);
     }
 
-    private async Task ToggleOption(TItem option)
+    private async Task ToggleDropdown()
     {
-        if (SelectedOptions.Contains(option))
+        _isDropdownOpen = !_isDropdownOpen;
+        if (_isDropdownOpen)
         {
-            SelectedOptions.Remove(option);
+            _module ??= await JsRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/SimpleBlazorMultiselect/js/simpleMultiselect.js");
+            _clickHandler = await _module.InvokeAsync<IJSObjectReference>("register", _dotNetHelper, _dropdownContainerRef);
         }
         else
         {
-            if (!IsMultiSelect)
-            {
-                SelectedOptions.Clear();
-            }
-            SelectedOptions.Add(option);
+            await CloseDropdown();
         }
-
-        await SelectedOptionsChanged.InvokeAsync(SelectedOptions);
     }
 
-    /// <summary>
-    /// The options to display in the dropdown.
-    /// Does not filter if <see cref="CanFilter"/> is false.
-    /// </summary>
-    private IEnumerable<TItem> FilteredOptions()
+    [JSInvokable]
+    public async Task CloseDropdown()
     {
-        foreach (var option in Options)
+        if (_clickHandler != null)
         {
-            if (!CanFilter)
-            {
-                yield return option;
-                continue;
-            }
-
-            var predicate = FilterPredicate ?? DefaultFilterPredicate;
-
-            if (predicate(option, _filterText))
-            {
-                yield return option;
-            }
+            await _clickHandler.InvokeVoidAsync("dispose");
+            _clickHandler = null;
         }
+
+        _isDropdownOpen = false;
+        await InvokeAsync(StateHasChanged);
     }
 
     private RenderFragment<TItem> RenderItem => item =>
         @<div class="dropdown-item" @onclick="() => ToggleOption(item)">
             <label @onclick:stopPropagation="true">
-                <input type="checkbox" checked="@IsOptionSelected(item)" @onchange="() => ToggleOption(item)"/> @StringSelector(item)
+                <input type="checkbox" checked="@IsOptionSelected(item)"
+                       @onchange="() => ToggleOption(item)"/> @StringSelector(item)
             </label>
         </div>;
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_clickHandler != null)
+        {
+            await _clickHandler.InvokeVoidAsync("dispose");
+        }
+
+        if (_module != null)
+        {
+            await _module.DisposeAsync();
+        }
+
+        _dotNetHelper?.Dispose();
+    }
 
 }

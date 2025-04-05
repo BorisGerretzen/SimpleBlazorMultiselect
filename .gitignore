@@ -6,3 +6,5 @@ riderModule.iml
 artifacts/
 .nuke/temp
 temp/
+.vs/
+.vs

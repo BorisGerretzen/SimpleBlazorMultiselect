@@ -1,23 +1,50 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "$ref": "#/definitions/build",
-  "title": "Build Schema",
   "definitions": {
-    "build": {
-      "type": "object",
+    "Host": {
+      "type": "string",
+      "enum": [
+        "AppVeyor",
+        "AzurePipelines",
+        "Bamboo",
+        "Bitbucket",
+        "Bitrise",
+        "GitHubActions",
+        "GitLab",
+        "Jenkins",
+        "Rider",
+        "SpaceAutomation",
+        "TeamCity",
+        "Terminal",
+        "TravisCI",
+        "VisualStudio",
+        "VSCode"
+      ]
+    },
+    "ExecutableTarget": {
+      "type": "string",
+      "enum": [
+        "BuildDemo",
+        "Clean",
+        "Compile",
+        "DeployDemo",
+        "Pack",
+        "Push",
+        "Restore"
+      ]
+    },
+    "Verbosity": {
+      "type": "string",
+      "description": "",
+      "enum": [
+        "Verbose",
+        "Normal",
+        "Minimal",
+        "Quiet"
+      ]
+    },
+    "NukeBuild": {
       "properties": {
-        "BaseUrl": {
-          "type": "string",
-          "description": "Base url"
-        },
-        "Configuration": {
-          "type": "string",
-          "description": "Configuration to build - Default is 'Debug' (local) or 'Release' (server)",
-          "enum": [
-            "Debug",
-            "Release"
-          ]
-        },
         "Continue": {
           "type": "boolean",
           "description": "Indicates to continue a previously failed build attempt"
@@ -27,42 +54,12 @@
           "description": "Shows the help text for this build assembly"
         },
         "Host": {
-          "type": "string",
           "description": "Host for execution. Default is 'automatic'",
-          "enum": [
-            "AppVeyor",
-            "AzurePipelines",
-            "Bamboo",
-            "Bitbucket",
-            "Bitrise",
-            "GitHubActions",
-            "GitLab",
-            "Jenkins",
-            "Rider",
-            "SpaceAutomation",
-            "TeamCity",
-            "Terminal",
-            "TravisCI",
-            "VisualStudio",
-            "VSCode"
-          ]
+          "$ref": "#/definitions/Host"
         },
         "NoLogo": {
           "type": "boolean",
           "description": "Disables displaying the NUKE logo"
-        },
-        "NugetApiKey": {
-          "type": "string",
-          "description": "API Key for the NuGet server",
-          "default": "Secrets must be entered via 'nuke :secrets [profile]'"
-        },
-        "NugetSource": {
-          "type": "string",
-          "description": "NuGet server URL"
-        },
-        "PackageVersion": {
-          "type": "string",
-          "description": "NuGet package version"
         },
         "Partition": {
           "type": "string",
@@ -87,56 +84,64 @@
           "type": "array",
           "description": "List of targets to be skipped. Empty list skips all dependencies",
           "items": {
-            "type": "string",
-            "enum": [
-              "BuildDemo",
-              "Clean",
-              "Compile",
-              "DeployDemo",
-              "Pack",
-              "Push",
-              "Restore",
-              "Test"
-            ]
+            "$ref": "#/definitions/ExecutableTarget"
           }
-        },
-        "Solution": {
-          "type": "string",
-          "description": "Path to a solution file that is automatically loaded"
         },
         "Target": {
           "type": "array",
           "description": "List of targets to be invoked. Default is '{default_target}'",
           "items": {
-            "type": "string",
-            "enum": [
-              "BuildDemo",
-              "Clean",
-              "Compile",
-              "DeployDemo",
-              "Pack",
-              "Push",
-              "Restore",
-              "Test"
-            ]
+            "$ref": "#/definitions/ExecutableTarget"
           }
+        },
+        "Verbosity": {
+          "description": "Logging verbosity during build execution. Default is 'Normal'",
+          "$ref": "#/definitions/Verbosity"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "properties": {
+        "BaseUrl": {
+          "type": "string",
+          "description": "Base url"
+        },
+        "Configuration": {
+          "type": "string",
+          "description": "Configuration to build - Default is 'Debug' (local) or 'Release' (server)",
+          "enum": [
+            "Debug",
+            "Release"
+          ]
+        },
+        "NugetApiKey": {
+          "type": "string",
+          "description": "API Key for the NuGet server",
+          "default": "Secrets must be entered via 'nuke :secrets [profile]'"
+        },
+        "NugetSource": {
+          "type": "string",
+          "description": "NuGet server URL"
+        },
+        "PackageVersion": {
+          "type": "string",
+          "description": "NuGet package version"
+        },
+        "Solution": {
+          "type": "string",
+          "description": "Path to a solution file that is automatically loaded"
         },
         "TokenGithub": {
           "type": "string",
           "description": "Github token",
           "default": "Secrets must be entered via 'nuke :secrets [profile]'"
-        },
-        "Verbosity": {
-          "type": "string",
-          "description": "Logging verbosity during build execution. Default is 'Normal'",
-          "enum": [
-            "Minimal",
-            "Normal",
-            "Quiet",
-            "Verbose"
-          ]
         }
       }
+    },
+    {
+      "$ref": "#/definitions/NukeBuild"
     }
-  }
+  ]
 }

@@ -1,0 +1,25 @@
+﻿@page "/ObjectBinding"
+<SimpleMultiselect Options="_people"
+                   @bind-SelectedOptions="_selectedPeople"
+                   StringSelector="person => person.Name" />
+
+<h4>You have selected:</h4>
+<ul>
+    @foreach (var person in _selectedPeople)
+    {
+        <li>@person.Name (@person.Age years old)</li>
+    }
+</ul>
+
+@code {
+    private record Person(string Name, int Age);
+
+    private readonly List<Person> _people =
+    [
+        new("Alice", 30),
+        new("Bob", 25),
+        new("Charlie", 35)
+    ];
+
+    private HashSet<Person> _selectedPeople = [];
+}

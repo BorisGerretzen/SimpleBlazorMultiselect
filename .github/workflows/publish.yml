@@ -16,18 +16,23 @@
 
 name: publish
 
-on: [workflow_dispatch]
+on:
+  workflow_dispatch:
+    inputs:
+      PackageVersion:
+        description: "Package Version"
+        required: true
 
 jobs:
   ubuntu-latest:
     name: ubuntu-latest
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 10000
       - name: 'Cache: .nuke/temp, ~/.nuget/packages'
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             .nuke/temp
@@ -36,4 +41,5 @@ jobs:
       - name: 'Run: Pack, Push'
         run: ./build.cmd Pack Push
         env:
+          PackageVersion: ${{ github.event.inputs.PackageVersion }}
           NugetApiKey: ${{ secrets.NUGET_API_KEY }}
