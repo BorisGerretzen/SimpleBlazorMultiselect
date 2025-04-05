@@ -1,4 +1,4 @@
-::deep .simple-dropdown .dropdown-button {
+::deep .simple-dropdown .simple-dropdown-button {
     color: red;
     background-color: black;
     border: 10px solid green;
@@ -27,9 +27,9 @@
     color: red;
 }
 
-    ::deep .simple-dropdown .dropdown-item:hover {
-        background-color: yellow;
-    }
+::deep .simple-dropdown .dropdown-item:hover {
+    background-color: yellow;
+}
 
 @keyframes rainbow {
     0%, 100% {
