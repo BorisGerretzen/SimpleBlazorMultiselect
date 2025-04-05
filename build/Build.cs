@@ -28,7 +28,6 @@ using Project = Nuke.Common.ProjectModel.Project;
     On = [GitHubActionsTrigger.WorkflowDispatch], 
     InvokedTargets = [nameof(Clean), nameof(BuildDemo), nameof(DeployDemo)], 
     FetchDepth = 10000, 
-    ImportSecrets = [nameof(TokenGithub)],
     WritePermissions = [GitHubActionsPermissions.Contents, GitHubActionsPermissions.Pages]
 )]
 class Build : NukeBuild
@@ -40,7 +39,6 @@ class Build : NukeBuild
     [Nuke.Common.Parameter("NuGet server URL.")] readonly string NugetSource = "https://api.nuget.org/v3/index.json";
     [Nuke.Common.Parameter("NuGet package version.")] readonly string PackageVersion;
     
-    [Nuke.Common.Parameter("Github token.")] [Secret] readonly string TokenGithub;
     [Nuke.Common.Parameter("Base url.")] readonly string BaseUrl = "/SimpleBlazorMultiselect/";
     
     [GitRepository] readonly GitRepository Repository;
@@ -119,7 +117,7 @@ class Build : NukeBuild
         .Requires(() => Configuration == Configuration.Release)
         .Executes(async () =>
         {
-            var credentials = new Credentials(TokenGithub);
+            var credentials = new Credentials(GitHubActions.Instance.Token);
             GitHubTasks.GitHubClient = new GitHubClient(new ProductHeaderValue(nameof(NukeBuild)),
                 new InMemoryCredentialStore(credentials));
             var client = GitHubTasks.GitHubClient;
