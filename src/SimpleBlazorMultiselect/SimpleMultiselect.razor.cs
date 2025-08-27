@@ -109,8 +109,17 @@ public partial class SimpleMultiselect<TItem> : ComponentBase
     private async Task ToggleOption(TItem option)
     {
         var newSelected = new HashSet<TItem>(SelectedOptions);
-        if (!newSelected.Remove(option))
+        
+        // Find the existing selected item that matches this option by string representation
+        var existingSelected = FindSelectedItemByStringRepresentation(option);
+        
+        if (existingSelected != null && newSelected.Remove(existingSelected))
         {
+            // Item was found and removed (deselected)
+        }
+        else
+        {
+            // Item was not found, so add it (selected)
             if (!IsMultiSelect)
             {
                 newSelected.Clear();
@@ -129,7 +138,13 @@ public partial class SimpleMultiselect<TItem> : ComponentBase
 
     private bool IsOptionSelected(TItem option)
     {
-        return SelectedOptions.Contains(option);
+        return FindSelectedItemByStringRepresentation(option) != null;
+    }
+    
+    private TItem? FindSelectedItemByStringRepresentation(TItem option)
+    {
+        var optionString = StringSelector(option);
+        return SelectedOptions.FirstOrDefault(selected => StringSelector(selected) == optionString);
     }
 
     private List<TItem>? _filteredOptionsCache;
