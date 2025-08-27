@@ -55,10 +55,10 @@
     ];
 
     // Same instance scenario - this should work
-    private HashSet<TestItem> _selectedItemsSameInstance;
+    private HashSet<TestItem> _selectedItemsSameInstance = new();
 
     // Different instance scenario - this should demonstrate the bug
-    private HashSet<TestItem> _selectedItemsDifferentInstance;
+    private HashSet<TestItem> _selectedItemsDifferentInstance = new();
 
     protected override void OnInitialized()
     {
