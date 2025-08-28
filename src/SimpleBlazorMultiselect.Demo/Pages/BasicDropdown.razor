@@ -5,7 +5,16 @@
     <div class="col-4">
         <SimpleMultiselect
             Options="@Globals.EuropeanCapitals"
-            @bind-SelectedOptions="_selectedItems"/>
+            @bind-SelectedOptions="_selectedItems">
+            <SelectedOptionsRenderer Context="options">
+                @foreach (var option in options)
+                {
+                    <span class="badge bg-primary" style="padding: 6px; margin-right: 10px;">
+								@option
+					</span>
+                }
+            </SelectedOptionsRenderer>
+        </SimpleMultiselect>
     </div>
     <div class="col-4">
         You have selected the following items:
