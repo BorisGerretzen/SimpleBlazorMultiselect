@@ -68,3 +68,12 @@ Below are some short examples, they all use the following `@code` block:
 This demonstrates the dark mode of the dropdown when Bootstrap is set to dark mode.
 ![image](https://github.com/user-attachments/assets/8613cd7a-cf6f-4116-b5f6-c0ee2b995fa6)
 
+### Equality options
+```html
+<SimpleMultiselect
+    Options="_items"
+    @bind-SelectedOptions="_selectedItems"
+    MatchByReference="true" />
+```
+By default the dropdown will check if items are in the selected items set based on their string representation.
+If you instead prefer the default equality comparison set `MatchByReference` to `true`.
