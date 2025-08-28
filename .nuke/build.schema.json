@@ -30,7 +30,8 @@
         "DeployDemo",
         "Pack",
         "Push",
-        "Restore"
+        "Restore",
+        "Test"
       ]
     },
     "Verbosity": {

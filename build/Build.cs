@@ -31,6 +31,11 @@ using Project = Nuke.Common.ProjectModel.Project;
     WritePermissions = [GitHubActionsPermissions.Contents, GitHubActionsPermissions.Pages],
     EnableGitHubToken = true
 )]
+[GitHubActions("ci", 
+    GitHubActionsImage.UbuntuLatest, 
+    On = [GitHubActionsTrigger.PullRequest, GitHubActionsTrigger.Push], 
+    InvokedTargets = [nameof(Test)], 
+    FetchDepth = 10000)]
 class Build : NukeBuild
 {
     [Nuke.Common.Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")] readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
@@ -53,6 +58,7 @@ class Build : NukeBuild
     
     Project LibProject => Solution.GetProject("SimpleBlazorMultiselect");
     Project DemoProject => Solution.GetProject("SimpleBlazorMultiselect.Demo");
+    Project TestsProject => Solution.GetProject("SimpleBlazorMultiselect.Tests");
     
     Target Clean => _ => _
         .Before(Restore)
@@ -86,7 +92,7 @@ class Build : NukeBuild
                 .SetProjectFile(Solution)
                 .SetConfiguration(Configuration)
                 .CombineWith(
-                    from project in new[] { LibProject, DemoProject }
+                    from project in new[] { LibProject, DemoProject, TestsProject }
                     from framework in project.GetTargetFrameworks()
                     select new { project, framework }, (cs, v) => cs
                         .SetProjectFile(v.project.Path)
@@ -95,6 +101,17 @@ class Build : NukeBuild
             );
         });
 
+    Target Test => _ => _
+        .DependsOn(Compile)
+        .Executes(() =>
+        {
+            DotNetTest(s => s
+                .EnableNoRestore()
+                .EnableNoBuild()
+                .SetConfiguration(Configuration)
+                .SetProjectFile(TestsProject));
+        });
+    
     Target BuildDemo => _ => _
         .DependsOn(Restore, Compile)
         .Before(DeployDemo)
@@ -197,7 +214,7 @@ class Build : NukeBuild
 
     // ReSharper disable once UnusedMember.Local
     Target Pack => _ => _
-        .DependsOn(Clean, Compile)
+        .DependsOn(Clean, Compile, Test)
         .Before(Push)
         .Requires(() => Configuration == Configuration.Release)
         .Executes(() =>
