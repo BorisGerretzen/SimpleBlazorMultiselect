@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 
 namespace SimpleBlazorMultiselect;
 
@@ -106,20 +102,20 @@ public partial class SimpleMultiselect<TItem> : ComponentBase
     [CascadingParameter(Name = "Standalone")]
     public bool Standalone { get; set; }
     
+    /// <summary>
+    /// If true, the selection of options will be matched by reference instead of by string representation.
+    /// </summary>
+    [Parameter]
+    public bool MatchByReference { get; set; }
+    
     private async Task ToggleOption(TItem option)
     {
         var newSelected = new HashSet<TItem>(SelectedOptions);
         
-        // Find the existing selected item that matches this option by string representation
-        var existingSelected = FindSelectedItemByStringRepresentation(option);
-        
-        if (existingSelected != null && newSelected.Remove(existingSelected))
+        var existingSelected = FindSelected(option);
+        var wasSelected = existingSelected != null && newSelected.Remove(existingSelected);
+        if (!wasSelected)
         {
-            // Item was found and removed (deselected)
-        }
-        else
-        {
-            // Item was not found, so add it (selected)
             if (!IsMultiSelect)
             {
                 newSelected.Clear();
@@ -138,11 +134,21 @@ public partial class SimpleMultiselect<TItem> : ComponentBase
 
     private bool IsOptionSelected(TItem option)
     {
-        return FindSelectedItemByStringRepresentation(option) != null;
+        return FindSelected(option) != null;
     }
     
-    private TItem? FindSelectedItemByStringRepresentation(TItem option)
+    /// <summary>
+    /// Helper function to find the selected option that matches the given options.
+    /// Options might not be the same reference.
+    /// </summary>
+    private TItem? FindSelected(TItem option)
     {
+        if (MatchByReference)
+        {
+            SelectedOptions.TryGetValue(option, out var existing);
+            return existing;
+        }
+        
         var optionString = StringSelector(option);
         return SelectedOptions.FirstOrDefault(selected => StringSelector(selected) == optionString);
     }

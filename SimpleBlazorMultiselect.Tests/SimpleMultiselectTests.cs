@@ -11,14 +11,14 @@ namespace SimpleBlazorMultiselect.Tests;
 public class SimpleMultiselectTests : TestContext
 {
     private readonly List<string> _testOptions = new() { "Apple", "Banana", "Cherry", "Date", "Elderberry" };
-    
+
     public SimpleMultiselectTests()
     {
         JSInterop.SetupModule("./_content/SimpleBlazorMultiselect/js/simpleMultiselect.js")
             .SetupModule("register", invocation => invocation.Arguments.Count == 2)
             .SetupVoid("dispose");
     }
-    
+
     [Fact]
     public void Component_RendersWithDefaultText_WhenNoOptionsSelected()
     {
@@ -67,7 +67,7 @@ public class SimpleMultiselectTests : TestContext
 
         var dropdownItems = component.FindAll(".dropdown-item");
         dropdownItems.Should().HaveCount(_testOptions.Count);
-        
+
         foreach (var option in _testOptions)
         {
             component.Markup.Should().Contain(option);
@@ -81,17 +81,14 @@ public class SimpleMultiselectTests : TestContext
         var component = RenderComponent<SimpleMultiselect<string>>(parameters => parameters
             .Add(p => p.Options, _testOptions)
             .Add(p => p.SelectedOptions, selectedOptions)
-            .Add(p => p.SelectedOptionsChanged, EventCallback.Factory.Create<HashSet<string>>(this, newSelection => 
-            {
-                selectedOptions = newSelection;
-            })));
+            .Add(p => p.SelectedOptionsChanged, EventCallback.Factory.Create<HashSet<string>>(this, newSelection => { selectedOptions = newSelection; })));
 
         var button = component.Find("button");
         button.Click();
-        
+
         var firstOption = component.FindAll(".dropdown-item")[0];
         firstOption.Click();
-        
+
         firstOption = component.FindAll(".dropdown-item")[0];
         var checkbox = firstOption.QuerySelector<IHtmlInputElement>("input[type='checkbox']");
         checkbox.Should().NotBeNull();
@@ -106,19 +103,16 @@ public class SimpleMultiselectTests : TestContext
         var component = RenderComponent<SimpleMultiselect<string>>(parameters => parameters
             .Add(p => p.Options, _testOptions)
             .Add(p => p.SelectedOptions, selectedOptions)
-            .Add(p => p.SelectedOptionsChanged, EventCallback.Factory.Create<HashSet<string>>(this, newSelection =>
-            {
-                selectedOptions = newSelection;
-            })));
+            .Add(p => p.SelectedOptionsChanged, EventCallback.Factory.Create<HashSet<string>>(this, newSelection => { selectedOptions = newSelection; })));
 
         var button = component.Find("button");
         button.Click();
-        
+
         var firstOption = component.FindAll(".dropdown-item")[0];
         firstOption.Click();
 
         selectedOptions.Should().NotContain("Apple");
-        foreach(var option in component.FindAll(".dropdown-item"))
+        foreach (var option in component.FindAll(".dropdown-item"))
         {
             var cb = option.QuerySelector<IHtmlInputElement>("input[type='checkbox']");
             cb!.IsChecked.Should().BeFalse();
@@ -149,7 +143,7 @@ public class SimpleMultiselectTests : TestContext
 
         var button = component.Find("button");
         button.Click();
-        
+
         var filterInput = component.Find(".simple-filter-input");
         filterInput.Input("App");
 
@@ -161,13 +155,13 @@ public class SimpleMultiselectTests : TestContext
     [Fact]
     public void Component_UsesCustomStringSelector_WhenProvided()
     {
-        var complexOptions = new List<TestItem>
+        var complexOptions = new List<TestValueItem>
         {
             new("1", "Apple"),
             new("2", "Banana")
         };
 
-        var component = RenderComponent<SimpleMultiselect<TestItem>>(parameters => parameters
+        var component = RenderComponent<SimpleMultiselect<TestValueItem>>(parameters => parameters
             .Add(p => p.Options, complexOptions)
             .Add(p => p.StringSelector, item => item.Name));
 
@@ -188,7 +182,7 @@ public class SimpleMultiselectTests : TestContext
 
         var button = component.Find("button");
         button.Click();
-        
+
         var filterInput = component.Find(".simple-filter-input");
         filterInput.Input("B");
 
@@ -218,22 +212,19 @@ public class SimpleMultiselectTests : TestContext
             .Add(p => p.Options, _testOptions)
             .Add(p => p.SelectedOptions, selectedOptions)
             .Add(p => p.IsMultiSelect, false)
-            .Add(p => p.SelectedOptionsChanged, EventCallback.Factory.Create<HashSet<string>>(this, newSelection => 
-            {
-                selectedOptions = newSelection;
-            })));
+            .Add(p => p.SelectedOptionsChanged, EventCallback.Factory.Create<HashSet<string>>(this, newSelection => { selectedOptions = newSelection; })));
 
         var button = component.Find("button");
         button.Click();
-        
+
         var firstOption = component.FindAll(".dropdown-item")[0];
         firstOption.Click();
         component.Render();
-        
+
         JSInterop.VerifyInvoke("dispose");
         component.Instance.IsDropdownOpen.Should().BeFalse();
-        
-        button.Click(); 
+
+        button.Click();
         var secondOption = component.FindAll(".dropdown-item")[1];
         secondOption.Click();
 
@@ -295,10 +286,10 @@ public class SimpleMultiselectTests : TestContext
 
         var button = component.Find("button");
         button.Click();
-        
+
         var filterInput = component.Find(".simple-filter-input");
         filterInput.Input("Appl");
-        
+
         // Trigger multiple renders without changing filter
         component.Render();
         component.Render();
@@ -307,6 +298,171 @@ public class SimpleMultiselectTests : TestContext
         dropdownItems.Should().HaveCount(1);
         dropdownItems[0].TextContent.Should().Contain("Apple");
     }
-    
-    private record TestItem(string Id, string Name);
+
+    [Fact]
+    public void Component_CanDeselect_WhenPrefilledValueItems()
+    {
+        var options = new List<TestValueItem>
+        {
+            new("1", "Apple"),
+            new("2", "Banana"),
+            new("3", "Cherry")
+        };
+        var selectedItems = new HashSet<TestValueItem>
+        {
+            new("1", "Apple")
+        };
+
+        var component = RenderComponent<SimpleMultiselect<TestValueItem>>(parameters => parameters
+            .Add(p => p.Options, options)
+            .Add(p => p.SelectedOptions, selectedItems)
+            .Add(p => p.StringSelector, item => item.Name)
+            .Add(p => p.DefaultText, "Select fruits")
+            .Add(p => p.SelectedOptionsChanged, EventCallback.Factory.Create<HashSet<TestValueItem>>(this, newSelection => { selectedItems = newSelection; })));
+
+        var button = component.Find("button");
+        button.TextContent.Should().Contain("Apple");
+        button.Click();
+
+        // Now only apple should be checked
+        var appleOption = component.FindAll(".dropdown-item")[0];
+        var appleCheckbox = appleOption.QuerySelector<IHtmlInputElement>("input[type='checkbox']");
+        appleCheckbox.Should().NotBeNull();
+        appleCheckbox.IsChecked.Should().BeTrue();
+
+        appleOption.Click();
+
+        // After clicking, apple should be deselected
+        selectedItems.Should().BeEmpty();
+        button = component.Find("button");
+        button.TextContent.Should().Be("Select fruits");
+    }
+
+    [Fact]
+    public void Component_CanDeselect_WhenPrefilledReferenceItems()
+    {
+        var options = new List<TestReferenceItem>
+        {
+            new("1", "Apple"),
+            new("2", "Banana"),
+            new("3", "Cherry")
+        };
+        var selectedItems = new HashSet<TestReferenceItem>
+        {
+            new("1", "Apple")
+        };
+
+        var component = RenderComponent<SimpleMultiselect<TestReferenceItem>>(parameters => parameters
+            .Add(p => p.Options, options)
+            .Add(p => p.SelectedOptions, selectedItems)
+            .Add(p => p.StringSelector, item => item.Name)
+            .Add(p => p.DefaultText, "Select fruits")
+            .Add(p => p.SelectedOptionsChanged, EventCallback.Factory.Create<HashSet<TestReferenceItem>>(this, newSelection => { selectedItems = newSelection; })));
+
+        var button = component.Find("button");
+        button.TextContent.Should().Contain("Apple");
+        button.Click();
+
+        // Now only apple should be checked
+        var appleOption = component.FindAll(".dropdown-item")[0];
+        var appleCheckbox = appleOption.QuerySelector<IHtmlInputElement>("input[type='checkbox']");
+        appleCheckbox.Should().NotBeNull();
+        appleCheckbox.IsChecked.Should().BeTrue();
+
+        appleOption.Click();
+
+        // After clicking, apple should be deselected
+        selectedItems.Should().BeEmpty();
+        button = component.Find("button");
+        button.TextContent.Should().Be("Select fruits");
+    }
+
+    [Fact]
+    public void Component_CanDeselectValueItem_WhenMatchByReference()
+    {
+        var options = new List<TestValueItem>
+        {
+            new("1", "Apple"),
+            new("2", "Banana"),
+            new("3", "Cherry")
+        };
+        var selectedItems = new HashSet<TestValueItem>
+        {
+            new("1", "Apple")
+        };
+
+        var component = RenderComponent<SimpleMultiselect<TestValueItem>>(parameters => parameters
+            .Add(p => p.Options, options)
+            .Add(p => p.SelectedOptions, selectedItems)
+            .Add(p => p.StringSelector, item => item.Name)
+            .Add(p => p.DefaultText, "Select fruits")
+            .Add(p => p.SelectedOptionsChanged, EventCallback.Factory.Create<HashSet<TestValueItem>>(this, newSelection => { selectedItems = newSelection; }))
+            .Add(p => p.MatchByReference, true)); // Should not matter for value types
+
+        var button = component.Find("button");
+        button.TextContent.Should().Contain("Apple");
+        button.Click();
+
+        // Now only apple should be checked
+        var appleOption = component.FindAll(".dropdown-item")[0];
+        var appleCheckbox = appleOption.QuerySelector<IHtmlInputElement>("input[type='checkbox']");
+        appleCheckbox.Should().NotBeNull();
+        appleCheckbox.IsChecked.Should().BeTrue();
+
+        appleOption.Click();
+
+        // After clicking, apple should be deselected
+        selectedItems.Should().BeEmpty();
+        button = component.Find("button");
+        button.TextContent.Should().Be("Select fruits");
+    }
+
+    [Fact]
+    public void Component_CannotDeselectIdenticalInstance_WhenMatchByReference()
+    {
+        var options = new List<TestReferenceItem>
+        {
+            new("1", "Apple"),
+            new("2", "Banana"),
+            new("3", "Cherry")
+        };
+        var selectedItems = new HashSet<TestReferenceItem>
+        {
+            new("1", "Apple")
+        };
+
+        var component = RenderComponent<SimpleMultiselect<TestReferenceItem>>(parameters => parameters
+            .Add(p => p.Options, options)
+            .Add(p => p.SelectedOptions, selectedItems)
+            .Add(p => p.StringSelector, item => item.Name)
+            .Add(p => p.DefaultText, "Select fruits")
+            .Add(p => p.SelectedOptionsChanged, EventCallback.Factory.Create<HashSet<TestReferenceItem>>(this, newSelection => { selectedItems = newSelection; }))
+            .Add(p => p.MatchByReference, true)); // This will break the deselection
+
+        var button = component.Find("button");
+        button.TextContent.Should().Contain("Apple");
+        button.Click();
+
+        // Apple should not be checked because the instance is different
+        // So clicking it will add another apple instead of removing the existing one
+        var appleOption = component.FindAll(".dropdown-item")[0];
+        var appleCheckbox = appleOption.QuerySelector<IHtmlInputElement>("input[type='checkbox']");
+        appleCheckbox.Should().NotBeNull();
+        appleCheckbox.IsChecked.Should().BeFalse();
+
+        appleOption.Click();
+
+        // After clicking, we should have two apples
+        selectedItems.Should().HaveCount(2);
+        button = component.Find("button");
+        button.TextContent.Should().Be("Apple, Apple");
+    }
+
+    private record TestValueItem(string Id, string Name);
+
+    private class TestReferenceItem(string id, string name)
+    {
+        public string Id { get; set; } = id;
+        public string Name { get; set; } = name;
+    }
 }
