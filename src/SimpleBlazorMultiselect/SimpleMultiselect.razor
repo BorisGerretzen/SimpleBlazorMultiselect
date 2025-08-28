@@ -9,7 +9,7 @@
     <button class="simple-dropdown-button btn dropdown-toggle" type="button"
             id="@Id"
             @onclick="ToggleDropdown"
-            aria-expanded="@_isDropdownOpen">
+            aria-expanded="@IsDropdownOpen">
         <span class="simple-dropdown-text">
             @if (SelectedOptions.Count == 0)
             {
@@ -27,7 +27,7 @@
     </button>
 
 
-    @if (_isDropdownOpen)
+    @if (IsDropdownOpen)
     {
         var options = FilteredOptions();
         <div class="dropdown-menu show">
@@ -58,7 +58,7 @@
 
 @code {
     private string _filterText = "";
-    private bool _isDropdownOpen = false;
+    internal bool IsDropdownOpen { get; private set; }= false;
     private ElementReference _dropdownContainerRef;
     private DotNetObjectReference<SimpleMultiselect<TItem>>? _dotNetHelper;
     private IJSObjectReference? _module;
@@ -71,8 +71,8 @@
 
     private async Task ToggleDropdown()
     {
-        _isDropdownOpen = !_isDropdownOpen;
-        if (_isDropdownOpen)
+        IsDropdownOpen = !IsDropdownOpen;
+        if (IsDropdownOpen)
         {
             _module ??= await JsRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/SimpleBlazorMultiselect/js/simpleMultiselect.js");
             _clickHandler = await _module.InvokeAsync<IJSObjectReference>("register", _dotNetHelper, _dropdownContainerRef);
@@ -86,13 +86,13 @@
     [JSInvokable]
     public async Task CloseDropdown()
     {
+        IsDropdownOpen = false;
         if (_clickHandler != null)
         {
             await _clickHandler.InvokeVoidAsync("dispose");
             _clickHandler = null;
         }
 
-        _isDropdownOpen = false;
         await InvokeAsync(StateHasChanged);
     }
 

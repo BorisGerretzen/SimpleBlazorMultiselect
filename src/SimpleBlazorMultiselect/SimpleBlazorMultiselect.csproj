@@ -22,8 +22,12 @@
     </PropertyGroup>
     
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.14" PrivateAssets="All" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0.19" PrivateAssets="All" />
         <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
+    </ItemGroup>
+    
+    <ItemGroup>
+        <InternalsVisibleTo Include="SimpleBlazorMultiselect.Tests" />
     </ItemGroup>
     
     <ItemGroup>
