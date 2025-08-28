@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Components;
+﻿using Microsoft.AspNetCore.Components;
 
 namespace SimpleBlazorMultiselect;
 
@@ -106,10 +102,19 @@ public partial class SimpleMultiselect<TItem> : ComponentBase
     [CascadingParameter(Name = "Standalone")]
     public bool Standalone { get; set; }
     
+    /// <summary>
+    /// If true, the selection of options will be matched by reference instead of by string representation.
+    /// </summary>
+    [Parameter]
+    public bool MatchByReference { get; set; }
+    
     private async Task ToggleOption(TItem option)
     {
         var newSelected = new HashSet<TItem>(SelectedOptions);
-        if (!newSelected.Remove(option))
+        
+        var existingSelected = FindSelected(option);
+        var wasSelected = existingSelected != null && newSelected.Remove(existingSelected);
+        if (!wasSelected)
         {
             if (!IsMultiSelect)
             {
@@ -129,7 +134,23 @@ public partial class SimpleMultiselect<TItem> : ComponentBase
 
     private bool IsOptionSelected(TItem option)
     {
-        return SelectedOptions.Contains(option);
+        return FindSelected(option) != null;
+    }
+    
+    /// <summary>
+    /// Helper function to find the selected option that matches the given options.
+    /// Options might not be the same reference.
+    /// </summary>
+    private TItem? FindSelected(TItem option)
+    {
+        if (MatchByReference)
+        {
+            SelectedOptions.TryGetValue(option, out var existing);
+            return existing;
+        }
+        
+        var optionString = StringSelector(option);
+        return SelectedOptions.FirstOrDefault(selected => StringSelector(selected) == optionString);
     }
 
     private List<TItem>? _filteredOptionsCache;
