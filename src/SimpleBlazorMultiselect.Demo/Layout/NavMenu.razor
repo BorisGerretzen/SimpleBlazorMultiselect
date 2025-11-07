@@ -9,6 +9,13 @@
 <div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
     <nav class="flex-column">
         <div class="nav-item px-3">
+            <button
+                onclick="document.querySelector('html').setAttribute('data-bs-theme', document.querySelector('html').getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark')"
+                class="nav-link btn btn-link">
+                <span class="bi bi-circle-half-nav-menu" aria-hidden="true"></span> Toggle Theme
+            </button>
+        </div>
+        <div class="nav-item px-3">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
                 <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
             </NavLink>
@@ -34,35 +41,35 @@
                 <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> SingleSelect
             </NavLink>
         </div>
-        
+
         <!-- CustomTemplate -->
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="CustomTemplate" Match="NavLinkMatch.All">
                 <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> CustomTemplate
             </NavLink>
-        </div>        
-        
+        </div>
+
         <!-- BigListVirtualize -->
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="BigListVirtualize" Match="NavLinkMatch.All">
                 <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Big list with Virtualize
             </NavLink>
         </div>
-        
+
         <!-- BigListNoVirtualize -->
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="BigListNoVirtualize" Match="NavLinkMatch.All">
                 <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Big list without Virtualize
             </NavLink>
         </div>
-        
+
         <!-- CustomStyling -->
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="CustomStyling" Match="NavLinkMatch.All">
                 <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> CustomStyling
             </NavLink>
         </div>
-        
+
         <!-- MultipleDropdowns -->
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="MultipleDropdowns" Match="NavLinkMatch.All">
