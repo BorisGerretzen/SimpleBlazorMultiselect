@@ -9,7 +9,8 @@
     <button class="simple-dropdown-button btn dropdown-toggle" type="button"
             id="@Id"
             @onclick="ToggleDropdown"
-            aria-expanded="@IsDropdownOpen">
+            aria-expanded="@IsDropdownOpen"
+            disabled="@Disabled">
         <span class="simple-dropdown-text">
             @if (SelectedOptions.Count == 0)
             {
@@ -69,8 +70,15 @@
         _dotNetHelper = DotNetObjectReference.Create(this);
     }
 
+    protected override async Task OnParametersSetAsync()
+    {
+        if (Disabled && IsDropdownOpen) 
+            await CloseDropdown();
+    }
+
     private async Task ToggleDropdown()
     {
+        if (Disabled) return;
         IsDropdownOpen = !IsDropdownOpen;
         if (IsDropdownOpen)
         {
