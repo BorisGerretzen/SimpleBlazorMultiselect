@@ -13,7 +13,7 @@
     --bs-btn-border-radius: 6px;
     --bs-btn-bg: #fff;
     --bs-border-color: #495057;
-    --bs-btn-disabled-border-color: var(--bs-border-color);
+    --bs-btn-disabled-border-color: #dee2e6;
     --bs-btn-disabled-bg: var(--bs-border-color);
     --bs-dropdown-zindex: 1000;
     --bs-dropdown-min-width: 10rem;
@@ -52,8 +52,12 @@
     }
 
     &:disabled[b-32ccgdfyms] {
-        background-color: var(--bs-btn-disabled-bg);
+        border-color: var(--bs-border-color);
         cursor: default;
+    }
+
+    .simple-bs-compat &:disabled[b-32ccgdfyms] {
+        border-color: var(--bs-btn-disabled-border-color);
     }
 }
 
