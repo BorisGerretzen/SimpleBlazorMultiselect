@@ -1,0 +1,31 @@
+﻿@page "/DisabledDropdown"
+<h3>DisabledDropdown</h3>
+
+<div class="row">
+    <div class="col-4">
+        <SimpleMultiselect
+                Disabled="@_isDisabled"
+                Options="@Globals.EuropeanCapitals"
+                CanFilter="true"
+                @bind-SelectedOptions="_selectedItems"/>
+    </div>
+    <div class="col-4">
+        <button class="btn btn-primary" @onclick="() => _isDisabled  = !_isDisabled">
+            @(_isDisabled ? "Enable" : "Disable")
+        </button>
+        <br/>
+        You have selected the following items:
+        <ul>
+            @foreach (var item in _selectedItems)
+            {
+                <li>@item</li>
+            }
+        </ul>
+    </div>
+</div>
+
+@code {
+    private bool _isDisabled;
+
+    private HashSet<string> _selectedItems = [];
+}
