@@ -19,6 +19,7 @@ dotnet add package SimpleBlazorMultiselect
 See the project `SimpleBlazorMultiselectDemo` for more examples of how to use the component, 
 or take a look at the properties page on the [wiki](https://github.com/BorisGerretzen/SimpleBlazorMultiselect/wiki/Properties).
 You can also view a live demo [here](https://borisgerretzen.github.io/SimpleBlazorMultiselect/).
+To view the source code of the demo, take a look in the `demo` folder of this repository.
 
 Below are some short examples, they all use the following `@code` block:
 ```csharp
