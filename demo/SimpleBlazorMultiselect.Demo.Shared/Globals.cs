@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace SimpleBlazorMultiselect.Demo;
+﻿namespace SimpleBlazorMultiselect.Demo.Shared;
 
 public static class Globals
 {

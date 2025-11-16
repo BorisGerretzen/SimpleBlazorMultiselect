@@ -26,6 +26,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\SimpleBlazorMultiselect\SimpleBlazorMultiselect.csproj" />
+      <ProjectReference Include="..\..\src\SimpleBlazorMultiselect\SimpleBlazorMultiselect.csproj" />
     </ItemGroup>
 </Project>

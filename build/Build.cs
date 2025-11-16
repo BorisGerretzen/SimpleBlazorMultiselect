@@ -51,14 +51,13 @@ class Build : NukeBuild
 
     [Solution] readonly Solution Solution;
 
-    AbsolutePath SourceDirectory => RootDirectory / "src";
     AbsolutePath ArtifactsDirectory => RootDirectory / "artifacts";
     AbsolutePath TempDirectory => RootDirectory / "temp";
     AbsolutePath DemoDirectory => TempDirectory / "demo";
     
-    Project LibProject => Solution.GetProject("SimpleBlazorMultiselect");
-    Project DemoProject => Solution.GetProject("SimpleBlazorMultiselect.Demo");
-    Project TestsProject => Solution.GetProject("SimpleBlazorMultiselect.Tests");
+    Project LibProject => Solution.GetAllProjects("*").Single(x => x.Name == "SimpleBlazorMultiselect");
+    Project DemoProject => Solution.GetAllProjects("*").Single(x => x.Name == "SimpleBlazorMultiselect.Demo.Wasm");
+    Project TestsProject => Solution.GetAllProjects("*").Single(x => x.Name == "SimpleBlazorMultiselect.Tests");
     
     Target Clean => _ => _
         .Before(Restore)
@@ -66,7 +65,7 @@ class Build : NukeBuild
         {
             TempDirectory.CreateOrCleanDirectory();
             DemoDirectory.CreateOrCleanDirectory();
-            SourceDirectory.GlobDirectories("**/bin", "**/obj")
+            RootDirectory.GlobDirectories("**/bin", "**/obj")
                 .ForEach(path =>
                 {
                     Console.WriteLine($"Removing '{path}'");
