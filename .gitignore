@@ -8,3 +8,5 @@ artifacts/
 temp/
 .vs/
 .vs
+.idea
+.idea/*
