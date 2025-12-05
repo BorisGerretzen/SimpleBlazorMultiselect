@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.AspNetCore.Components;
 
 namespace SimpleBlazorMultiselect;
 
@@ -101,25 +102,30 @@ public partial class SimpleMultiselect<TItem> : ComponentBase
     /// </summary>
     [CascadingParameter(Name = "Standalone")]
     public bool Standalone { get; set; }
-    
+
     /// <summary>
     /// If true, the selection of options will be matched by reference instead of by string representation.
     /// </summary>
     [Parameter]
     public bool MatchByReference { get; set; }
-    
+
     private async Task ToggleOption(TItem option)
     {
         var newSelected = new HashSet<TItem>(SelectedOptions);
-        
-        var existingSelected = FindSelected(option);
-        var wasSelected = existingSelected != null && newSelected.Remove(existingSelected);
+
+        var wasSelected = false;
+        if (TryFindSelected(option, out var existing))
+        {
+            wasSelected = newSelected.Remove(existing);
+        }
+
         if (!wasSelected)
         {
             if (!IsMultiSelect)
             {
                 newSelected.Clear();
             }
+
             newSelected.Add(option);
         }
 
@@ -134,23 +140,34 @@ public partial class SimpleMultiselect<TItem> : ComponentBase
 
     private bool IsOptionSelected(TItem option)
     {
-        return FindSelected(option) != null;
+        return TryFindSelected(option, out _);
     }
-    
-    /// <summary>
-    /// Helper function to find the selected option that matches the given options.
-    /// Options might not be the same reference.
-    /// </summary>
-    private TItem? FindSelected(TItem option)
+
+    private bool TryFindSelected(TItem option, [NotNullWhen(true)] out TItem existing)
     {
+        if (SelectedOptions.Count == 0)
+        {
+            existing = default!;
+            return false;
+        }
+
         if (MatchByReference)
         {
-            SelectedOptions.TryGetValue(option, out var existing);
-            return existing;
+            return SelectedOptions.TryGetValue(option, out existing!);
         }
-        
+
         var optionString = StringSelector(option);
-        return SelectedOptions.FirstOrDefault(selected => StringSelector(selected) == optionString);
+        foreach (var selected in SelectedOptions)
+        {
+            if (StringSelector(selected) == optionString)
+            {
+                existing = selected!;
+                return true;
+            }
+        }
+
+        existing = default!;
+        return false;
     }
 
     private List<TItem>? _filteredOptionsCache;
@@ -158,21 +175,21 @@ public partial class SimpleMultiselect<TItem> : ComponentBase
     private Func<TItem, string, bool>? _prevFilterPredicate;
     private string? _prevFilterText;
     private bool _prevCanFilter;
-    
+
     private List<TItem> FilteredOptions()
     {
-        if(_prevCanFilter == CanFilter && _prevFilterPredicate == FilterPredicate && _prevFilterText == _filterText && _prevOptions == Options)
+        if (_prevCanFilter == CanFilter && _prevFilterPredicate == FilterPredicate && _prevFilterText == _filterText && _prevOptions == Options)
         {
             return _filteredOptionsCache ?? Options;
         }
-        
+
         _prevOptions = Options;
         _prevCanFilter = CanFilter;
         _prevFilterPredicate = FilterPredicate;
         _prevFilterText = _filterText;
-        
+
         _filteredOptionsCache = [];
-        if(!CanFilter || string.IsNullOrWhiteSpace(_filterText))
+        if (!CanFilter || string.IsNullOrWhiteSpace(_filterText))
         {
             _filteredOptionsCache.AddRange(Options);
         }
@@ -181,7 +198,7 @@ public partial class SimpleMultiselect<TItem> : ComponentBase
             var predicate = FilterPredicate ?? DefaultFilterPredicate;
             _filteredOptionsCache.AddRange(Options.Where(option => predicate(option, _filterText)));
         }
-        
+
         return _filteredOptionsCache;
     }
 }
